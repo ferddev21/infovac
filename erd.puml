@@ -1,4 +1,4 @@
-@startuml spk-saw
+@startuml erd
 entity "Users" as u {
   id : int <<PK>>
   --

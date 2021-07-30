@@ -21,8 +21,13 @@ use App\Http\Controllers\PageController;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 
-//Ke halaman admin 
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+//Ke halaman dashboard
+Route::get('/admin', function () {
+    return redirect()->route('admin.index');
+});
+
+//dashboard admin
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.index');
 //ke halaman admin data vaksin 
 Route::get('/admin/vaksin', [AdminController::class, 'vaksin'])->name('admin.vaksin');
 //ke halaman admin data posts 
