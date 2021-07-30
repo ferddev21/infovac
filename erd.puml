@@ -1,0 +1,45 @@
+@startuml spk-saw
+entity "Users" as u {
+  id : int <<PK>>
+  --
+  username : int
+  password : string(32)
+  email : string(32)
+  nama : string(32)
+  alamat : string(128) nullable
+  provinces_id : char(2) nullable
+  cities_id : char(4) nullable
+  districts_id : char(7) nullable
+  telp : string(32) 
+  level : enum['admin', 'member']
+  status : enum['active', 'inactive']
+}
+entity "Vaksins" as v {
+  id : int <<PK>>
+  --
+  nama_vaksin : string(32)
+  keterangan : text()
+}
+
+entity "Posts" as p {
+  id : int <<PK>>
+  id_users : int <<FK>>
+  id_vaksins : int <<FK>>
+  --
+  nama_tempat : string(128)
+  alamat : string(128) nullable
+  provinces_id : char(2) nullable
+  cities_id : char(4) nullable
+  districts_id : char(7) nullable
+  keterangan_tempat : text()
+  tgl_mulai : timestamps()
+  tgl_akhir : timestamps()
+  link_pendaftaran : string(128)
+  image_post : string(128)
+  status : enum['active', 'inactive']
+}
+
+u |o..o{ p
+v |o..o{ p
+
+@enduml
