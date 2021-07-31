@@ -13,7 +13,7 @@ class PageController extends Controller
     {
         $data = [
             'title' => 'Info Vaksinasi',
-            'imageCover' => 'https://images.pexels.com/photos/5863388/pexels-photo-5863388.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+            'imageCover' => 'https://images.pexels.com/photos/5863389/pexels-photo-5863389.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
         ];
 
         return view('pages.home', $data);
