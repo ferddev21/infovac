@@ -23,7 +23,7 @@ class AuthController extends Controller
             return redirect()->route('home');
         }
         $data = [
-            'title' => 'Auth'
+            'title' => 'Login'
         ];
         return view('pages.login', $data);
     }
@@ -33,22 +33,28 @@ class AuthController extends Controller
         if ($this->checkAuth()) {
             return redirect()->route('home');
         }
-        return view('pages.register');
+        $data = [
+            'title' => 'Register'
+        ];
+
+        return view('pages.register', $data);
     }
 
     public function registerProcess(Request $request)
     {
         $request->validate([
             'username' => 'required|max:32|min:6|alpha_dash|unique:users,username',
-            'password' => 'required|max:32|min:6',
-            'name' => 'required|max:32|min:6',
             'email' => 'required|email|unique:users,email',
+            'telphone' => 'required|max:15|min:9',
+            'password' => 'required|max:32|min:4',
+            'nama' => 'required|max:32|min:4',
         ]);
 
         $user = new User();
         $user->username = $request->username;
         $user->email = $request->email;
-        $user->name = $request->name;
+        $user->nama = $request->nama;
+        $user->telp = $request->telphone;
         $user->level = 'member';
         $user->password = bcrypt($request->password);
         $user->status = 'active';
@@ -64,16 +70,15 @@ class AuthController extends Controller
     {
         request()->validate(
             [
-                'username' => 'required',
+                'email' => 'required',
                 'password' => 'required',
             ]
         );
 
-        $kredensil = $request->only('username', 'password');
+        $kredensil = $request->only('email', 'password');
 
         if (Auth::attempt($kredensil)) {
             $user = Auth::user();
-
 
             if ($user->level === null) {
                 return redirect()->route('login')->with('error', 'anda tidak memiliki akses');
@@ -84,11 +89,11 @@ class AuthController extends Controller
                 return redirect()->route('login')->with('error', 'Akses anda diblokir');
             }
 
-            if ($user->level !== 'admin') {
-                return redirect()->intended('admin.index');
+            if ($user->level == 'admin') {
+                return redirect()->intended('admin');
             }
 
-            return redirect()->intended('my');
+            return redirect()->intended('member');
         }
 
         return redirect()->route('login')->with('error', 'Pengguna tidak ditemukan');

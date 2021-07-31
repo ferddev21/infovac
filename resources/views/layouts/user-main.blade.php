@@ -20,8 +20,10 @@
 
 <body>
     <!-- Responsive navbar-->
-    <nav id="navbar" class="navbar navbar-expand-lg navbar-light border-bottom bg-white  {{ (Request::is('/') == route('home')) ? 'fixed-top' : ''}}" style="
-        {{ (Request::is('/') == route('home')) ? 'top: -100px' : ''}}">
+    <nav id="navbar"
+        class="navbar navbar-expand-lg navbar-light border-bottom bg-white  {{ Request::url() == route('home') ? 'fixed-top' : '' }}"
+        style="
+        {{ Request::url() == route('home') ? 'top: -100px' : '' }}">
         <div class="container px-lg-5">
             <a class="navbar-brand font-weight-500" href="#!">InfoVac <i class="bi bi-shield-fill-check"></i></a>
             <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
@@ -31,9 +33,30 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="">Berkontribusi</a></li>
-                    <li class="nav-item"><a class="nav-link" href="">Login</a></li>
+                    <li class="nav-item"><a class="nav-link {{ Request::url() == route('home') ? 'active' : '' }} "
+                            aria-current="page" href="{{ route('home') }}">Home
+                        </a>
+                    </li>
+                    @if (Auth::user()->level = 'member')
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Post</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-capitalize {{ Request::url() == route('my') ? 'active' : '' }}"
+                                href="{{ route('my') }}">{{ Auth::user()->username }}
+                            </a>
+                        </li>
+
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Berkontribusi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::url() == route('login') ? 'active' : '' }}"
+                                href="{{ route('login') }}">Login
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -57,22 +80,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="{{ asset('assets_member/js/scripts.js') }}"></script>
-    @if (Request::segment(1) == '')
-    <script>
-        // When the user scrolls down 20px from the top of the document, slide down the navbar
-        window.onscroll = function() {
-            scrollFunction()
-        };
+    @if (Request::url() == route('home'))
+        <script>
+            // When the user scrolls down 20px from the top of the document, slide down the navbar
+            window.onscroll = function() {
+                scrollFunction()
+            };
 
-        function scrollFunction() {
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                document.getElementById("navbar").style.top = "0";
-            } else {
-                document.getElementById("navbar").style.top = "-500px";
+            function scrollFunction() {
+                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                    document.getElementById("navbar").style.top = "0";
+                } else {
+                    document.getElementById("navbar").style.top = "-500px";
+                }
             }
-        }
-    </script>
-      @endif
+        </script>
+    @endif
 </body>
 
 </html>

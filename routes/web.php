@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VaksinsController;
+use App\Http\Controllers\MemberController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +26,7 @@ use App\Http\Controllers\Admin\VaksinsController;
 // });
 
 Route::get('/', [PageController::class, 'home'])->name('home');
-
+Route::get('/post/{id}', [PageController::class, 'detailPost'])->name('detail.post');
 
 
 //Ke halaman dashboard
@@ -53,6 +55,13 @@ Route::get('/admin/user/delete/{id}', [UserController::class, 'destroy'])->name(
 
 
 
-//login route
+//auth route
 Route::get('/auth', [AuthController::class, 'index'])->name('login');
-Route::get('/post/{id}', [PageController::class, 'detailPost'])->name('detail.post');
+Route::post('/login/procces', [AuthController::class, 'login'])->name('login.process');
+Route::get('/auth/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register/procces', [AuthController::class, 'registerProcess'])->name('register.process');
+
+
+
+//member post
+Route::get('/member', [MemberController::class, 'index'])->name('my');

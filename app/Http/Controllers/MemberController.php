@@ -11,6 +11,9 @@ class MemberController extends Controller
 {
     public function index()
     {
-        # code...
+        $data = [
+            'title' => 'Member'
+        ];
+        return view('pages.member.index', $data);
     }
 }
