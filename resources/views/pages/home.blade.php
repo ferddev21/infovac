@@ -72,7 +72,7 @@
                 <div class="col-lg-6 col-xxl-4 mb-5 ">
                     <div class="card rounded-lg shadow-sm rounded-2">
                         <div class="card-body">
-                            <a href="" class="text-decoration-none text-dark">
+                            <a href="{{ route('detail.post', ['id'=>1]) }}" class="text-decoration-none text-dark">
                                 <div class="d-flex justify-content-between mb-0">
                                     <p><i class="bi bi-award"></i> Sinovac Vaccion</p>
 
@@ -89,7 +89,7 @@
                                     additional content. This content is a little bit longer...</p>
                             </a>
                             <hr>
-                            <a href="">Daftar <i class="bi bi-arrow-right-short"></i></a>
+                            <a href="" class="btn btn-outline-dark btn-sm" target="_blank">Daftar <i class="bi bi-arrow-right-short"></i></a>
                         </div>
                         <div class="card-footer bg-dark">
                             <small class="fst-italic text-white">Terakhir update 3 hari yang lalu</small>
@@ -97,89 +97,6 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6 col-xxl-4 mb-5 ">
-                    <div class="card rounded-lg shadow-sm rounded-2">
-                        <div class="card-body">
-                            <a href="" class="text-decoration-none text-dark">
-                                <div class="d-flex justify-content-between mb-0">
-                                    <p><i class="bi bi-award"></i> Sinovac Vaccion</p>
-
-                                    <div>
-                                        <span class="badge bg-dark p-2">5 Agt - 25 Agt</span>
-                                    </div>
-                                </div>
-                                <h2 class="fw-bold">
-                                    Vaksinasi lansia kota
-                                    yogyakarta
-                                </h2>
-                                <p class="fw-light"><i class="bi bi-geo-alt-fill"></i> Jl. Waru [Rumah Sakit Nusa Indah]</p>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                    additional content. This content is a little bit longer...</p>
-                            </a>
-                            <hr>
-                            <a href="">Daftar <i class="bi bi-arrow-right-short"></i></a>
-                        </div>
-                        <div class="card-footer bg-dark">
-                            <small class="fst-italic text-white">Terakhir update 3 hari yang lalu</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-xxl-4 mb-5 ">
-                    <div class="card rounded-lg shadow-sm rounded-2">
-                        <div class="card-body">
-                            <a href="" class="text-decoration-none text-dark">
-                                <div class="d-flex justify-content-between mb-0">
-                                    <p><i class="bi bi-award"></i> Sinovac Vaccion</p>
-
-                                    <div>
-                                        <span class="badge bg-dark p-2">5 Agt - 25 Agt</span>
-                                    </div>
-                                </div>
-                                <h2 class="fw-bold">
-                                    Vaksinasi lansia kota
-                                    yogyakarta
-                                </h2>
-                                <p class="fw-light"><i class="bi bi-geo-alt-fill"></i> Jl. Waru [Rumah Sakit Nusa Indah]</p>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                    additional content. This content is a little bit longer...</p>
-                            </a>
-                            <hr>
-                            <a href="">Daftar <i class="bi bi-arrow-right-short"></i></a>
-                        </div>
-                        <div class="card-footer bg-dark">
-                            <small class="fst-italic text-white">Terakhir update 3 hari yang lalu</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-xxl-4 mb-5 ">
-                    <div class="card rounded-lg shadow-sm rounded-2">
-                        <div class="card-body">
-                            <a href="" class="text-decoration-none text-dark">
-                                <div class="d-flex justify-content-between mb-0">
-                                    <p><i class="bi bi-award"></i> Sinovac Vaccion</p>
-
-                                    <div>
-                                        <span class="badge bg-dark p-2">5 Agt - 25 Agt</span>
-                                    </div>
-                                </div>
-                                <h2 class="fw-bold">
-                                    Vaksinasi lansia kota
-                                    yogyakarta
-                                </h2>
-                                <p class="fw-light"><i class="bi bi-geo-alt-fill"></i> Jl. Waru [Rumah Sakit Nusa Indah]</p>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                    additional content. This content is a little bit longer...</p>
-                            </a>
-                            <hr>
-                            <a href="">Daftar <i class="bi bi-arrow-right-short"></i></a>
-                        </div>
-                        <div class="card-footer bg-dark">
-                            <small class="fst-italic text-white">Terakhir update 3 hari yang lalu</small>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

@@ -14,7 +14,7 @@
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('assets_admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{ asset('assets_admin/vendors/ti-icons/css/themify-icons.css') }}">
-
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets_admin/js/select.dataTables.min.css') }}">
     <!-- End plugin css for this page -->
     <!-- inject:css -->

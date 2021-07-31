@@ -8,7 +8,7 @@
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                   <h3 class="font-weight-bold">Data Member</h3>
-                  <h6 class="font-weight-normal mb-0">Data lokasi vaksin yang sudah di inputkan oleh user</h6>
+                  <h6 class="font-weight-normal mb-0">Data member yang sudah melakukan registrasi</h6>
                 </div>
 
               </div>
@@ -18,7 +18,7 @@
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Daftar List tempat Vaksin</p>
+                  <p class="card-title">Daftar List member</p>
           
                   <div class="row">
                     
@@ -28,20 +28,28 @@
                           <thead>
                             <tr>
                               <th>No</th>
-                              <th>Tempat Vaksin</th>
-                              <th>Jenis Vaksin</th>
-                              <th>Tanggal Registrasi</th>
+                              <th>Username</th>
+                              <th>email</th>
+                              <th>Status</th>
+                 
                               <th>Aksi</th>
                             </tr>
                           </thead>
+                          @foreach ($users as $u)
+                              
+        
                           <tr>
                               <td>1</td>
-                              <td>JEC</td>
-                              <td>Arnovac</td>
-                              <td>12-07-2021</td>
+                              <td>{{$u->username}}</td>
+                              <td>{{$u->email}}</td>
+                              <td>{{$u->status}}</td>
+                  
+                       
                        <td>     
-                        <button class="btn btn-primary " type="submit"> Detail </button>
+                        <a href="{{route('member.delete',$u->id)}}" class="btn btn-danger bi bi-trash"></a>  
+                        <a href="{{route('member.edit',$u->id)}}" class="btn btn-primary bi bi-pencil-square"></a>
                     </td>
+                    @endforeach
                           </tr>
                           
                       </table>

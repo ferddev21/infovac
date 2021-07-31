@@ -22,7 +22,10 @@ class AuthController extends Controller
         if ($this->checkAuth()) {
             return redirect()->route('home');
         }
-        return view('pages.login');
+        $data = [
+            'title' => 'Auth'
+        ];
+        return view('pages.login', $data);
     }
 
     public function register()

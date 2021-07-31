@@ -31,4 +31,10 @@ class Post extends Model
         //join table post with table users
         return DB::table('posts')->select()->join('users', 'posts.user_id', '=', 'users.id')->get();
     }
+
+    public function getDataPostsWithUsersById($id)
+    {
+        return DB::table('posts')->select()->join('users', 'posts.user_id', '=', 'users.id')
+            ->where('users_id', $id)->get();
+    }
 }

@@ -18,4 +18,14 @@ class PageController extends Controller
 
         return view('pages.home', $data);
     }
+
+    public function detailPost()
+    {
+        $data = [
+            'title' => 'Vaksinasi Lansia'
+
+        ];
+
+        return view('pages.detail-post', $data);
+    }
 }

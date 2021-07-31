@@ -2,8 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AdminController;
+
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\PostsController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\VaksinsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,19 +25,34 @@ use App\Http\Controllers\PageController;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 
-//Ke halaman dashboard
-Route::get('/admin', function () {
-    return redirect()->route('admin.index');
-});
 
-//dashboard admin
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.index');
+
+//Ke halaman dashboard
+// Route::get('/admin', function () {
+//     return redirect()->route('admin.index');
+// });
+
+
+//Ke halaman admin 
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 //ke halaman admin data vaksin 
-Route::get('/admin/vaksin', [AdminController::class, 'vaksin'])->name('admin.vaksin');
+Route::get('/admin/vaksin', [VaksinsController::class, 'index'])->name('vaksin.index');
+Route::get('/admin/vaksin/tambah', [VaksinsController::class, 'create'])->name('vaksin.tambah');
+Route::post('/admin/vaksin/store', [VaksinsController::class, 'store'])->name('vaksin.store');
+Route::get('/admin/vaksin/edit/{id}', [VaksinsController::class, 'edit'])->name('vaksin.edit');
+Route::post('/admin/vaksin/update/{id}', [VaksinsController::class, 'update'])->name('vaksin.update');
+Route::get('/admin/vaksin/delete/{id}', [VaksinsController::class, 'destroy'])->name('vaksin.delete');
+
 //ke halaman admin data posts 
-Route::get('/admin/posts', [AdminController::class, 'posts'])->name('admin.posts');
-//ke halaman admin data posts 
-Route::get('/admin/user', [AdminController::class, 'user'])->name('admin.user');
+Route::get('/admin/posts', [PostsController::class, 'index'])->name('posts.index');
+
+//ke halaman admin data user 
+Route::get('/admin/user', [UserController::class, 'index'])->name('member.index');
+Route::get('/admin/user/edit/{id}', [UserController::class, 'edit'])->name('member.edit');
+Route::get('/admin/user/delete/{id}', [UserController::class, 'destroy'])->name('member.delete');
+
+
 
 //login route
 Route::get('/auth', [AuthController::class, 'index'])->name('login');
+Route::get('/post/{id}', [PageController::class, 'detailPost'])->name('detail.post');
