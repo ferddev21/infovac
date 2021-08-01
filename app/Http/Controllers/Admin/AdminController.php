@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Vaksin;
 
 class AdminController extends Controller
 {
@@ -14,8 +17,14 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //tittle_halaman
+        //menghitung jumlah data dari tabel
+        $jumlah_posts = Post::count();
+        $jumlah_vaksin = Vaksin::count();
+        $jumlah_user = User::count();
         $data = [
+            'jumlah_posts' => $jumlah_posts,
+            'jumlah_vaksins' => $jumlah_posts,
+            'jumlah_user' => $jumlah_user,
             'title' => 'Dashbord Admin'
         ];
 

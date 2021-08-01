@@ -47,6 +47,7 @@ Route::get('/admin/vaksin/delete/{id}', [VaksinsController::class, 'destroy'])->
 
 //ke halaman admin data posts 
 Route::get('/admin/posts', [PostsController::class, 'index'])->name('posts.index');
+Route::get('/admin/posts/{id}', [PostsController::class, 'detail'])->name('posts.detail');
 
 //ke halaman admin data user 
 Route::get('/admin/user', [UserController::class, 'index'])->name('member.index');

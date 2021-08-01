@@ -40,11 +40,11 @@
                           <tr>
                             <td>1</td>
                             <td>{{$p->nama_tempat}}</td>
-                            <td>{{$p->user_id}}</td>
-                            <td>{{$p->vaksin_id}}</td>
+                            <td>{{$p->user->nama}}</td>
+                            <td>{{$p->vaksin->nama_vaksin}}</td>
                             <td>{{$p->status}}</td>
                             <td>
-                              <button class="btn btn-primary " type="submit"> Detail </button>
+                              <a href="{{route('posts.detail',$p->id)}}" class="btn btn-primary "> Detail </a>
                             </td>
                           </tr>
                           @endforeach

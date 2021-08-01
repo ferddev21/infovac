@@ -32,9 +32,23 @@ class Post extends Model
         return DB::table('posts')->select()->join('users', 'posts.user_id', '=', 'users.id')->get();
     }
 
-    public function getDataPostsWithUsersById($id)
+    // public function getDataPostsWithUsersById($id)
+    // {
+    //     return DB::table('posts')->select()->join('users', 'posts.user_id', '=', 'users.id')
+    //         ->where('users_id', $id)->get();
+    // }
+
+    //Mengambil data dari foreignkey
+    public function vaksin()
     {
-        return DB::table('posts')->select()->join('users', 'posts.user_id', '=', 'users.id')
-            ->where('users_id', $id)->get();
+        return $this->belongsTo(Vaksin::class);
+    }
+    // public function satuvaksin($id)
+    // {
+    //     return $this->belongsTo(Vaksin::class)->find($id);
+    // }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -18,13 +18,25 @@ class PostsController extends Controller
     public function index()
     {
         $p = Post::paginate(8);
-        
+
         $data = [
             'title' => 'Data Posts',
             'posts' => $p
         ];
 
         return view('pages.admin.posts', $data);
+    }
+
+    public function detail($id)
+    {
+        $p = Post::find($id);
+
+        $data = [
+            'title' => 'Data Posts',
+            'posts' => $p
+        ];
+
+        return view('pages.admin.detail-posts', $data);
     }
 
     /**
