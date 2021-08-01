@@ -14,13 +14,11 @@
                             <form action="{{ route('login.process') }}" method="POST">
                                 @csrf
 
-                                @include('includes.message-flash')
-
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control  @error('email') is-invalid @enderror" id="email"
-                                        placeholder="email" name="email" value="{{ old('email') }}">
-                                    <label for="email">Alamat Email</label>
-                                    @error('email')
+                                    <input type="text" class="form-control  @error('login') is-invalid @enderror" id="login"
+                                        placeholder="login" name="login" value="{{ old('login') }}">
+                                    <label for="login">Alamat Email atau Username</label>
+                                    @error('login')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

@@ -12,7 +12,8 @@
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12 d-flex justify-content-center justify-content-lg-end">
                     <div class="d-flex align-items-center">
-                        <a href="" class="btn btn-light shadow text-black m-1">Berkontribusi info vaksin</a>
+                        <a href="{{ route('register') }}" class="btn btn-light shadow text-black m-1">Berkontribusi info
+                            vaksin</a>
                         {{-- <a href="" class="btn btn-dark shadow text-white m-1">Login</a> --}}
                     </div>
                 </div>
@@ -26,31 +27,26 @@
             <div class="d-flex justify-content-center py-4 border p-3 flex-lg-row flex-column shadow-sm">
                 <div class=" d-flex align-items-center">
                     <label for="Provinsi" class="form-label">Provinsi</label>
-                    <select class="form-select form-select m-3" aria-label=".form-select-lg example" id="Provinsi">
+                    <select class="form-select form-select m-3" aria-label=".form-select-lg example" id="province">
                         <option selected>Pilih Provinsi ...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        @foreach ($province as $p)
+                            <option value="{{ $p->id }}">
+                                {{ $p->name }}</option>
+                        @endforeach
                     </select>
                 </div>
 
                 <div class=" d-flex align-items-center">
                     <label for="Kabupaten" class="form-label">Kabupaten</label>
-                    <select class="form-select form-select m-3" aria-label=".form-select-lg example" id="Kabupaten">
+                    <select class="form-select form-select m-3" aria-label=".form-select-lg example" id="city">
                         <option selected>Pilih Kabupaten ...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
                     </select>
                 </div>
 
                 <div class=" d-flex align-items-center">
                     <label for="Kecamatan" class="form-label">Kecamatan</label>
-                    <select class="form-select form-select m-3" aria-label=".form-select-lg example" id="Kecamatan">
+                    <select class="form-select form-select m-3" aria-label=".form-select-lg example" id="district">
                         <option selected>Pilih Kecamatan ...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
                     </select>
                 </div>
                 <div class="d-flex align-items-center">
@@ -72,7 +68,7 @@
                 <div class="col-lg-6 col-xxl-4 mb-5 ">
                     <div class="card rounded-lg shadow-sm rounded-2">
                         <div class="card-body">
-                            <a href="{{ route('detail.post', ['id'=>1]) }}" class="text-decoration-none text-dark">
+                            <a href="{{ route('detail.post', ['id' => 1]) }}" class="text-decoration-none text-dark">
                                 <div class="d-flex justify-content-between mb-0">
                                     <p><i class="bi bi-award"></i> Sinovac Vaccion</p>
 
@@ -89,7 +85,8 @@
                                     additional content. This content is a little bit longer...</p>
                             </a>
                             <hr>
-                            <a href="" class="btn btn-outline-dark btn-sm" target="_blank">Daftar <i class="bi bi-arrow-right-short"></i></a>
+                            <a href="" class="btn btn-outline-dark btn-sm" target="_blank">Daftar <i
+                                    class="bi bi-arrow-right-short"></i></a>
                         </div>
                         <div class="card-footer bg-dark">
                             <small class="fst-italic text-white">Terakhir update 3 hari yang lalu</small>

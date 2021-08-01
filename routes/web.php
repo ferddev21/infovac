@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
@@ -9,6 +10,7 @@ use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VaksinsController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MemberPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,9 @@ use App\Http\Controllers\MemberController;
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/post/{id}', [PageController::class, 'detailPost'])->name('detail.post');
 
+//route for address
+Route::post('/address/city', [AddressController::class, 'city'])->name('address.city');
+Route::post('/address/district', [AddressController::class, 'district'])->name('address.district');
 
 //Ke halaman dashboard
 // Route::get('/admin', function () {
@@ -61,8 +66,11 @@ Route::get('/auth', [AuthController::class, 'index'])->name('login');
 Route::post('/login/procces', [AuthController::class, 'login'])->name('login.process');
 Route::get('/auth/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register/procces', [AuthController::class, 'registerProcess'])->name('register.process');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 
-
-//member post
-Route::get('/member', [MemberController::class, 'index'])->name('my');
+//member route
+Route::get('/member/account', [MemberController::class, 'index'])->name('member.account');
+Route::post('/member/account/update', [MemberController::class, 'update'])->name('member.account.update');
+Route::post('/member/account/update-password', [MemberController::class, 'updatePassword'])->name('member.account.update_password');
+Route::get('/member/posts', [MemberPostController::class, 'index'])->name('member.post.index');

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use Brian2694\Toastr\Facades\Toastr;
 
 class AuthController extends Controller
 {
@@ -45,7 +45,7 @@ class AuthController extends Controller
         $request->validate([
             'username' => 'required|max:32|min:6|alpha_dash|unique:users,username',
             'email' => 'required|email|unique:users,email',
-            'telphone' => 'required|max:15|min:9',
+            'telphone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'password' => 'required|max:32|min:4',
             'nama' => 'required|max:32|min:4',
         ]);
@@ -60,8 +60,8 @@ class AuthController extends Controller
         $user->status = 'active';
         $user->save();
 
-        $request->session()->flash('success', $request->username . ' berhasil dibuat');
-        return redirect()->route('login')->with('success', 'Berhasil membuat akun silahkan login');
+        Toastr::success($request->nama . ' berhasil terdaftar', 'Success');
+        return redirect()->route('login');
     }
 
 
@@ -70,39 +70,48 @@ class AuthController extends Controller
     {
         request()->validate(
             [
-                'email' => 'required',
+                'login' => 'required',
                 'password' => 'required',
             ]
         );
 
-        $kredensil = $request->only('email', 'password');
+        $login_type = filter_var($request->login, FILTER_VALIDATE_EMAIL)
+            ? 'email'
+            : 'username';
+
+        $request->merge([$login_type => $request->login]);
+
+        $kredensil = $request->only($login_type, 'password');
 
         if (Auth::attempt($kredensil)) {
             $user = Auth::user();
 
             if ($user->level === null) {
-                return redirect()->route('login')->with('error', 'anda tidak memiliki akses');
+                Toastr::warning('Anda tidak memiliki akses', 'Warning');
+                return redirect()->route('login');
             }
 
             if ($user->status !== 'active') {
                 Auth::logout();
-                return redirect()->route('login')->with('error', 'Akses anda diblokir');
+                Toastr::warning('Akses anda diblokir hubungin admin', 'Warning');
+                return redirect()->route('login');
             }
 
             if ($user->level == 'admin') {
                 return redirect()->intended('admin');
             }
 
-            return redirect()->intended('member');
+            return redirect()->route('member.post.index');
         }
-
-        return redirect()->route('login')->with('error', 'Pengguna tidak ditemukan');
+        Toastr::warning('Pengguna tidak ditemukan, coba lagi', 'Warning');
+        return redirect()->route('login');
     }
 
     public function logout(Request $request)
     {
         $request->session()->flush();
         Auth::logout();
-        return redirect()->route('login')->with('success', 'Anda berhasil Logout');
+        Toastr::success('Anda berhasil Logout', 'Success');
+        return redirect()->route('login');
     }
 }
