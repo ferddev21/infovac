@@ -42,6 +42,9 @@ Route::post('/address/district', [AddressController::class, 'district'])->name('
 
 //Ke halaman admin 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+//ke halaman admin setting
+Route::get('/admin/setting/{id}', [AdminController::class, 'edit'])->name('admin.setting');
+Route::post('/admin/setting/update/{id}', [AdminController::class, 'update'])->name('admin.update');
 //ke halaman admin data vaksin 
 Route::get('/admin/vaksin', [VaksinsController::class, 'index'])->name('vaksin.index');
 Route::get('/admin/vaksin/tambah', [VaksinsController::class, 'create'])->name('vaksin.tambah');
