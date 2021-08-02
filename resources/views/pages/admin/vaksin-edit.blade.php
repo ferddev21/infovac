@@ -32,8 +32,8 @@
                         @csrf
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Nama Vaksin</label>
-                          <input type="text" name="nama_vaksins" class="form-control  @error('nama_vaksins') is-invalid @enderror" id="nama_vaksins" value="{{$vaksins['nama_vaksin']}}">
-                          @error('nama_vaksins')
+                          <input type="text" name="nama_vaksin" class="form-control  @error('nama_vaksins') is-invalid @enderror" id="nama_vaksin" value="{{$vaksins['nama_vaksin']}}">
+                          @error('nama_vaksin')
                           <div class="invalid-feedback">
                             {{$message}}
                           </div>

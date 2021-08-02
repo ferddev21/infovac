@@ -56,8 +56,11 @@ Route::get('/admin/posts/{id}', [PostsController::class, 'detail'])->name('posts
 
 //ke halaman admin data user 
 Route::get('/admin/user', [UserController::class, 'index'])->name('member.index');
+Route::get('/admin/user/tambah', [UserController::class, 'create'])->name('member.tambah');
 Route::get('/admin/user/edit/{id}', [UserController::class, 'edit'])->name('member.edit');
 Route::get('/admin/user/delete/{id}', [UserController::class, 'destroy'])->name('member.delete');
+Route::post('/admin/user/store', [UserController::class, 'store'])->name('member.store');
+Route::post('/admin/user/update/{id}', [UserController::class, 'update'])->name('member.update');
 
 
 

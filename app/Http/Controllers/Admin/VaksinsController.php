@@ -61,7 +61,7 @@ class VaksinsController extends Controller
             'keterangan' => $request->keterangan
         ]);
         //balik kehalaman form tambah dengan status
-        return redirect('/admin/vaksin/tambah')->with('status', 'Data vaksin, Berhasil Ditambah!');
+        return redirect('/admin/vaksin/')->with('status', 'Data vaksin, Berhasil Ditambah!');
     }
 
     /**
@@ -105,7 +105,7 @@ class VaksinsController extends Controller
     {
         //validasi form kosong
         $request->validate([
-            'nama_vaksins' => 'required',
+            'nama_vaksin' => 'required',
             'keterangan' => 'required',
         ]);
 
@@ -113,7 +113,7 @@ class VaksinsController extends Controller
 
 
         $vaksins->update([
-            'nama_vaksin' => $request->nama_vaksins,
+            'nama_vaksin' => $request->nama_vaksin,
             'keterangan' => $request->keterangan
         ]);
         $nama = $request->nama_vaksins;

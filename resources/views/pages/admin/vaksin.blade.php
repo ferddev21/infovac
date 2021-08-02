@@ -19,7 +19,7 @@
                 <div class="card-body">
                   <p class="card-title">Daftar List Vaksin</p>
                   <a href="{{ route('vaksin.tambah') }}">
-                    <h6 class="bi bi-arrow-right-square"> Tambah Data</h6>
+                    <h6 class="bi bi-arrow-right-square"> Tambah Vaksin</h6>
                   </a>
                   @if (session('status'))
                   <div class="alert alert-success">

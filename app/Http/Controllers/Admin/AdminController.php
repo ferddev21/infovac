@@ -23,7 +23,7 @@ class AdminController extends Controller
         $jumlah_user = User::count();
         $data = [
             'jumlah_posts' => $jumlah_posts,
-            'jumlah_vaksins' => $jumlah_posts,
+            'jumlah_vaksins' => $jumlah_vaksin,
             'jumlah_user' => $jumlah_user,
             'title' => 'Dashbord Admin'
         ];

@@ -19,7 +19,15 @@
               <div class="card">
                 <div class="card-body">
                   <p class="card-title">Daftar List member</p>
-          
+                  <a href="{{ route('member.tambah') }}">
+                    <h6 class="bi bi-arrow-right-square"> Tambah User</h6>
+                  </a>
+                  @if (session('status'))
+                  <div class="alert alert-success">
+                      {{ session('status') }}
+                  </div>
+              @endif
+                  <hr>
                   <div class="row">
                     
                     <div class="col-12">
@@ -35,11 +43,11 @@
                               <th>Aksi</th>
                             </tr>
                           </thead>
-                          @foreach ($users as $u)
+                          @foreach ($users as $key => $u)
                               
         
                           <tr>
-                              <td>1</td>
+                              <td>{{$users->firstItem() + $key}}</td>
                               <td>{{$u->username}}</td>
                               <td>{{$u->email}}</td>
                               <td>{{$u->status}}</td>
@@ -55,6 +63,11 @@
                       </table>
      
                       </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-5">
+                      <span class="float-right"><br>{{ $users->links() }}</span>
                     </div>
                   </div>
                   </div>

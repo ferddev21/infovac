@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -31,7 +32,12 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title' => 'Tambah User'
+
+        ];
+
+        return view('pages.admin.member-tambah', $data);
     }
 
     /**
@@ -42,7 +48,33 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $request->validate([
+            'username' => 'required|unique:users',
+            'password' => 'required',
+            'email' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'telp' => 'required',
+        ]);
+        $level = 'member';
+        $nama = $request->nama;
+        //encrypt password
+        $password = $request->password;
+        $hashedPassword = Hash::make($password);
+        $user = User::create([
+            'username' => $request->username,
+            'password' => $hashedPassword,
+            'email' => $request->email,
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'telp' => $request->telp,
+            'level' => $level,
+            'status' => $request->status,
+        ]);
+
+        return redirect('/admin/user/')->with('status', 'Data member ' . $nama . ' berhasil Ditambahkan!');
     }
 
     /**
@@ -81,9 +113,37 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
+        //validasi form kosong
+        $request->validate([
+            'username' => 'required',
+            'email' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'telp' => 'required',
+        ]);
+
+        // mengecek isi form
+        // dd($request->all());
+
+        //mengambil data lama unuk dimasukkan apabila di form tidak ada
+        $user = User::whereId($id)->first();
+        $password = $user->password;
+        $old_nama = $user->nama;
+
+        //insert ke model database
+        $user->update([
+            'username' => $request->username,
+            'password' => $password,
+            'email' => $request->email,
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'telp' => $request->telp,
+            'status' => $request->status,
+        ]);
+
+        return redirect('/admin/user/')->with('status', 'Data member ' . $old_nama . ' berhasil diedit!');
     }
 
     /**
@@ -92,8 +152,9 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        //
+        User::whereId($id)->delete();
+        return redirect('/admin/user/')->with('status', 'Data User berhasil dihapus!');
     }
 }

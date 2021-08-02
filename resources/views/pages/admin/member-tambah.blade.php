@@ -18,7 +18,7 @@
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Edit data User </p>
+                  <p class="card-title">Tambah data User </p>
                   @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
@@ -28,11 +28,20 @@
                  <hr>
                   <div class="row">
                     <div class="col-md-12">
-                      <form method="POST" action="{{ route('member.update',$user['id'])}}">
+                      <form method="POST" action="{{ route('member.store')}}">
                         @csrf
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Username</label>
-                          <input type="text" name="username" class="form-control  @error('username') is-invalid @enderror" id="username" value="{{$user['username']}}">
+                          <input type="text" name="username" class="form-control  @error('username') is-invalid @enderror" id="username" ">
+                          @error('username')
+                          <div class="invalid-feedback">
+                            {{$message}}
+                          </div>
+                          @enderror
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Password</label>
+                          <input type="text" name="password" class="form-control  @error('password') is-invalid @enderror" id="password" ">
                           @error('username')
                           <div class="invalid-feedback">
                             {{$message}}
@@ -41,7 +50,7 @@
                         </div>
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Email</label>
-                          <input type="text" name="email" class="form-control  @error('email') is-invalid @enderror" id="email" value="{{$user['email']}}">
+                          <input type="text" name="email" class="form-control  @error('email') is-invalid @enderror" id="email" ">
                           @error('email')
                           <div class="invalid-feedback">
                             {{$message}}
@@ -50,7 +59,7 @@
                         </div>
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Nama</label>
-                          <input type="text" name="nama" class="form-control  @error('nama') is-invalid @enderror" id="nama" value="{{$user['nama']}}">
+                          <input type="text" name="nama" class="form-control  @error('nama') is-invalid @enderror" id="nama" ">
                           @error('nama')
                           <div class="invalid-feedback">
                             {{$message}}
@@ -59,7 +68,7 @@
                         </div>
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Alamat</label>
-                          <input type="text" name="alamat" class="form-control  @error('alamat') is-invalid @enderror" id="alamat" value="{{$user['alamat']}}">
+                          <input type="text" name="alamat" class="form-control  @error('alamat') is-invalid @enderror" id="alamat" ">
                           @error('keterangan')
                           <div class="invalid-feedback">
                             {{$message}}
@@ -69,7 +78,7 @@
 
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Telp</label>
-                          <input type="text" name="telp" class="form-control  @error('telp') is-invalid @enderror" id="telp" value="{{$user['telp']}}">
+                          <input type="text" name="telp" class="form-control  @error('telp') is-invalid @enderror" id="telp" ">
                           @error('telp')
                           <div class="invalid-feedback">
                             {{$message}}
@@ -79,7 +88,7 @@
                       <div class="mb-3">
                         <label for="exampleInputEmail1"  class="form-label">Status</label>
                         <select class="form-select" name="status" aria-label="Default select example">
-                          <option selected value="{{$user->status}}">{{$user->status}}</option>
+                          <option selected value="">Pilih Status</option>
                           <option value="active">active</option>
                           <option value="inactive">inactive</option>
                         </select>
