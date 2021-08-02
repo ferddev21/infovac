@@ -12,8 +12,9 @@
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12 d-flex justify-content-center justify-content-lg-end">
                     <div class="d-flex align-items-center">
-                        <a href="{{ route('register') }}" class="btn btn-light shadow text-black m-1">Berkontribusi info
-                            vaksin</a>
+                        <a href="{{ route('register') }}" class="btn btn-light shadow text-black m-1">
+                            Berkontribusi info vaksin
+                        </a>
                         {{-- <a href="" class="btn btn-dark shadow text-white m-1">Login</a> --}}
                     </div>
                 </div>
