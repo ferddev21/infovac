@@ -12,6 +12,7 @@ class Post extends Model
 
     protected $fillable = [
         'user_id',
+        'vaksin_id',
         'nama_tempat',
         'alamat',
         'provinces_id',

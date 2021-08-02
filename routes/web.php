@@ -79,4 +79,7 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/member/account', [MemberController::class, 'index'])->name('member.account');
 Route::post('/member/account/update', [MemberController::class, 'update'])->name('member.account.update');
 Route::post('/member/account/update-password', [MemberController::class, 'updatePassword'])->name('member.account.update_password');
+
 Route::get('/member/posts', [MemberPostController::class, 'index'])->name('member.post.index');
+Route::get('/member/posts/add', [MemberPostController::class, 'add'])->name('member.post.add');
+Route::post('/member/posts/create', [MemberPostController::class, 'create'])->name('member.post.create');

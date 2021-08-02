@@ -113,7 +113,7 @@ h1,
 }
 
 
-.text-truncate-container p {
+.text-truncate-container div {
     -webkit-line-clamp: 3 !important;
     display: -webkit-box !important;
     -webkit-box-orient: vertical !important;
