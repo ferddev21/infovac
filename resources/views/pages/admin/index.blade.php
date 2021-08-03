@@ -33,32 +33,40 @@
             <div class="col-md-12 grid-margin transparent">
               <div class="row">
                 <div class="col-md-6 mb-4 stretch-card transparent">
+  
                   <div class="card card-tale">
+                    <a href="{{ route('vaksin.index') }}">
                     <div class="card-body">
-                      <p class="mb-4">Data Vaksin</p>
+                      <p class="mb-4">Data Vaksin </p>
                       <p class="fs-30 mb-2">{{$jumlah_vaksins}}</p>
                       <p>10.00% (30 days)</p>
                     </div>
+                  </a>
                   </div>
+              
                 </div>
                 <div class="col-md-6 mb-4 stretch-card transparent">
-                  <div class="card card-dark-blue">
+                  <div  class="card card-tale">
+                    <a href="{{ route('posts.index') }}">
                     <div class="card-body">
                       <p class="mb-4">Data Posts</p>
                       <p class="fs-30 mb-2">{{$jumlah_posts}}</p>
                       <p>22.00% (30 days)</p>
                     </div>
+                  </a>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
-                  <div class="card card-light-blue">
+                  <div class="card card-tale">
+                    <a href="{{ route('member.index') }}">
                     <div class="card-body">
                       <p class="mb-4">Data User</p>
                       <p class="fs-30 mb-2">{{$jumlah_user}}</p>
                       <p>2.00% (30 days)</p>
                     </div>
+                  </a>
                   </div>
                 </div>
                

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
+use App\Models\Vaksin;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -30,10 +31,11 @@ class PostsController extends Controller
     public function detail($id)
     {
         $p = Post::find($id);
-
+        $v = Vaksin::all();
         $data = [
             'title' => 'Data Posts',
-            'posts' => $p
+            'posts' => $p,
+            'vaksins' => $v
         ];
 
         return view('pages.admin.detail-posts', $data);

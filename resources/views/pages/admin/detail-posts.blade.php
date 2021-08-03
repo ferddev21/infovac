@@ -28,7 +28,7 @@
                         @csrf
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Nama Tempat</label>
-                          <input type="text" name="nama_tempat" class="form-control  @error('nama_tempat') is-invalid @enderror" id="nama_tempat" value="{{$posts['nama_tempat']}}">
+                          <input type="text"  name="nama_tempat" class="form-control  @error('nama_tempat') is-invalid @enderror" id="nama_tempat" value="{{$posts['nama_tempat']}}">
                           @error('username')
                           <div class="invalid-feedback">
                             {{$message}}
@@ -37,7 +37,7 @@
                         </div>
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Nama User Pengirim</label>
-                          <input type="text" name="user_id" class="form-control  @error('user_id') is-invalid @enderror" id="user_id" value="{{$posts['user_id']}}. {{$posts->user->nama}}">
+                          <input type="text" disabled name="user_id" class="form-control  @error('user_id') is-invalid @enderror" id="user_id" value="{{$posts->user->nama}}">
                           @error('user_id')
                           <div class="invalid-feedback">
                             {{$message}}
@@ -46,7 +46,15 @@
                         </div>
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Nama Vaksin</label>
-                          <input type="text" name="vaksin_id" class="form-control  @error('vaksin_id') is-invalid @enderror" id="vaksin_id" value="{{$posts['vaksin_id']}}. {{$posts->vaksin->nama_vaksin}}">
+                          <div class="form-group">
+                            <select id="test1" name="vaksin" class="form-control" type="text">
+                              <option>Pilih Jenis Vaksin</option>
+                             @foreach ($vaksins as $vaksin)
+                              <option value="{{$vaksin->id}}" @if(old('vaksin',$posts->vaksin_id)==$vaksin->id) selected="selected" @endif>{{$vaksin->nama_vaksin}}</option>
+                              @endforeach
+                              </select>
+                          </div>
+                    
                           @error('vaksin_id')
                           <div class="invalid-feedback">
                             {{$message}}
@@ -81,9 +89,9 @@
                           </div>
                           @enderror
                         </div>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Tanggal Mulai</label>
-                          <input type="text" name="tgl_mulai" class="form-control  @error('tgl_mulai') is-invalid @enderror" id="tgl_mulai" value="{{$posts['tgl_mulai']}}">
+                        <div class="mb-3">             
+                          <label for="exampleInputEmail1"  class="form-label">Tanggal Mulai</label>
+                          <input type="text" name="tgl_mulai"width="276" class="form-control  @error('tgl_mulai') is-invalid @enderror" value="{{$posts['tgl_mulai']}}">
                           @error('tgl_mulai')
                           <div class="invalid-feedback">
                             {{$message}}
@@ -92,7 +100,7 @@
                         </div>       
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Tanggal Akhir</label>
-                          <input type="text" name="tgl_akhir" class="form-control  @error('tgl_akhir') is-invalid @enderror" id="tgl_akhir" value="{{$posts['tgl_akhir']}}">
+                          <input type="text" name="tgl_akhir" width="276"  class="form-control  @error('tgl_akhir') is-invalid @enderror" value="{{$posts['tgl_akhir']}}">
                           @error('tgl_akhir')
                           <div class="invalid-feedback">
                             {{$message}}
@@ -137,4 +145,6 @@
         </footer>
         <!-- partial -->
       </div>
+
+    
       @endsection

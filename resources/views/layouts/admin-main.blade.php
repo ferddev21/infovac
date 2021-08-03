@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="{{ asset('assets_admin/css/vertical-layout-light/style.css') }}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset('assets_admin/images/favicon.png') }}">
+
+ 
+   
 </head>
 
 <body>
@@ -337,6 +340,7 @@
     <script src="{{ asset('assets_admin/js/dashboard.js') }}"></script>
     <script src="{{ asset('assets_admin/js/Chart.roundedBarCharts.js') }}"></script>
     <!-- End custom js for this page-->
+
 </body>
 
 </html>
