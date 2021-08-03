@@ -20,8 +20,10 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
 
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 
 </head>
 
@@ -122,6 +124,45 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script type="text/javascript">
+        function deleteConfirmation(id) {
+            swal({
+                title: "Hapus Post",
+                text: "Yakin ingin menghapus post, data akan terhapus permanent?",
+                type: "warning",
+                showCancelButton: !0,
+                confirmButtonText: "Hapus!",
+                cancelButtonText: "Batal",
+                reverseButtons: !0
+            }).then(function(e) {
+
+                if (e.value === true) {
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+                    $.ajax({
+                            type: 'POST',
+                            url: "{{ route('member.post.delete') }}",
+                            data: {
+                                _token: CSRF_TOKEN,
+                                id: id
+                            },
+                            dataType: 'JSON',
+                        }).done(function(response) {
+                            swal('Berhasil dihapus, silahkan refresh halaman', response.message, response
+                                .status);
+                            readProducts();
+                        })
+                        .fail(function() {
+                            swal('Oops...', 'Something went wrong with ajax !', 'error');
+                        });
+                } else {
+                    e.dismiss;
+                }
+
+            }, function(dismiss) {
+                return false;
+            })
+        }
+
         $(function() {
             var dateFormat = "dd MM yy",
                 from = $("#from")

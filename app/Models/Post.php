@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravolt\Indonesia\Models\City;
+use Laravolt\Indonesia\Models\District;
+use Laravolt\Indonesia\Models\Province;
 
 class Post extends Model
 {
@@ -48,5 +51,20 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'provinces_id');
+    }
+
+    public function citie()
+    {
+        return $this->belongsTo(City::class, 'cities_id');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class, 'districts_id');
     }
 }

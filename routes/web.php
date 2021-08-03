@@ -28,7 +28,7 @@ use App\Http\Controllers\MemberPostController;
 // });
 
 Route::get('/', [PageController::class, 'home'])->name('home');
-Route::get('/post/{id}', [PageController::class, 'detailPost'])->name('detail.post');
+Route::get('/post/{id}', [PageController::class, 'postView'])->name('post.view');
 
 //route for address
 Route::post('/address/city', [AddressController::class, 'city'])->name('address.city');
@@ -83,3 +83,6 @@ Route::post('/member/account/update-password', [MemberController::class, 'update
 Route::get('/member/posts', [MemberPostController::class, 'index'])->name('member.post.index');
 Route::get('/member/posts/add', [MemberPostController::class, 'add'])->name('member.post.add');
 Route::post('/member/posts/create', [MemberPostController::class, 'create'])->name('member.post.create');
+Route::get('/member/posts/{id}/edit', [MemberPostController::class, 'edit'])->name('member.post.edit');
+Route::post('/member/posts/update', [MemberPostController::class, 'update'])->name('member.post.update');
+Route::post('/member/posts/delete', [MemberPostController::class, 'delete'])->name('member.post.delete');

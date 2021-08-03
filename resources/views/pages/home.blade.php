@@ -12,7 +12,8 @@
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12 d-flex justify-content-center justify-content-lg-end">
                     <div class="d-flex align-items-center">
-                        <a href="{{ route('register') }}" class="btn btn-light shadow text-black m-1">
+                        <a href="{{ !Auth::user() ? route('register') : route('member.post.index') }}"
+                            class="btn btn-light shadow text-black m-1">
                             Berkontribusi info vaksin
                         </a>
                         {{-- <a href="" class="btn btn-dark shadow text-white m-1">Login</a> --}}
@@ -66,35 +67,48 @@
         <div class="container px-lg-5 ">
             <!-- Page Features-->
             <div class="row gx-lg-5">
-                <div class="col-lg-6 col-xxl-4 mb-5 ">
-                    <div class="card rounded-lg shadow-sm rounded-2">
-                        <div class="card-body">
-                            <a href="{{ route('detail.post', ['id' => 1]) }}" class="text-decoration-none text-dark">
-                                <div class="d-flex justify-content-between mb-0">
-                                    <p><i class="bi bi-award"></i> Sinovac Vaccion</p>
+                @foreach ($posts as $post)
+                    <div class="col-lg-6 col-xxl-4 mb-5 ">
+                        <div class="card rounded-lg shadow-sm rounded-2">
+                            <div class="card-body">
+                                <a href="{{ route('post.view', hashids($post->id, 'encode')) }}"
+                                    class="text-decoration-none text-dark">
+                                    <div class="d-flex justify-content-between mb-0">
+                                        <p><i class="bi bi-award"></i> {{ $post->vaksin->nama_vaksin }}</p>
 
-                                    <div>
-                                        <span class="badge bg-dark p-2">5 Agt - 25 Agt</span>
+                                        <div>
+                                            <span class="badge bg-dark p-2">
+                                                {{ carbon($post->tgl_mulai)->toFormattedDateString() }}
+                                                -
+                                                {{ carbon($post->tgl_selesai)->toFormattedDateString() }}
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <h2 class="fw-bold">
-                                    Vaksinasi lansia kota
-                                    yogyakarta
-                                </h2>
-                                <p class="fw-light"><i class="bi bi-geo-alt-fill"></i> Jl. Waru [Rumah Sakit Nusa Indah]</p>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                    additional content. This content is a little bit longer...</p>
-                            </a>
-                            <hr>
-                            <a href="" class="btn btn-outline-dark btn-sm" target="_blank">Daftar <i
-                                    class="bi bi-arrow-right-short"></i></a>
-                        </div>
-                        <div class="card-footer bg-dark">
-                            <small class="fst-italic text-white">Terakhir update 3 hari yang lalu</small>
+                                    <h2 class="fw-bold">
+                                        {{ $post->nama_tempat }}
+                                    </h2>
+                                    <p class="fw-light text-capitalize">
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                        {{ fullAddress($post->alamat, $post->district->name, $post->citie->name, $post->province->name) }}
+                                    </p>
+                                    <div class="text-truncate-container ">
+                                        <div class="card-text w-100 h-100">
+                                            <?= $post->keterangan_tempat ?>
+                                        </div>
+                                    </div>
+                                </a>
+                                <hr>
+                                <a href="{{ $post->link_pendaftaran }}" class="btn btn-outline-dark btn-sm"
+                                    target="_blank">Daftar <i class="bi bi-arrow-right-short"></i></a>
+                            </div>
+                            <div class="card-footer bg-dark">
+                                <small class="fst-italic text-white">
+                                    <span class="text-capitalize">{{ $post->user->nama }}</span> •
+                                    {{ carbon($post->updated_at)->diffForHumans() }}</small>
+                            </div>
                         </div>
                     </div>
-                </div>
-
+                @endforeach
             </div>
         </div>
     </section>
