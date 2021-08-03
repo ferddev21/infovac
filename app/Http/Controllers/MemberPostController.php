@@ -28,7 +28,7 @@ class MemberPostController extends Controller
     {
         $data = [
             'title' => 'Postingan Ku',
-            'posts' => $this->postModel->where(['user_id' => Auth::user()->id])->get()
+            'posts' => $this->postModel->where('user_id', Auth::user()->id)->get()
         ];
 
         return view('pages.member.post-index', $data);
@@ -101,7 +101,7 @@ class MemberPostController extends Controller
     public function edit($id)
     {
         $id = hashids($id, 'decode');
-        $Post = Post::whereId($id[0])->first();
+        $Post = Post::with(['vaksin', 'user', 'province', 'citie', 'district'])->whereId($id[0])->first();
 
         $data = [
             'title' => 'Edit Post | ' . $Post->nama_tempat,

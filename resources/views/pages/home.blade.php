@@ -26,39 +26,42 @@
 
     <section class="pt-5" id="search">
         <div class="container px-lg-5">
-            <div class="d-flex justify-content-center py-4 border p-3 flex-lg-row flex-column shadow-sm">
-                <div class=" d-flex align-items-center">
-                    <label for="Provinsi" class="form-label">Provinsi</label>
-                    <select class="form-select form-select m-3" aria-label=".form-select-lg example" id="province">
-                        <option selected>Pilih Provinsi ...</option>
-                        @foreach ($province as $p)
-                            <option value="{{ $p->id }}">
-                                {{ $p->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+            <form action="{{ route('search') }}" method="get">
+                <div class="d-flex justify-content-center py-4 border p-3 flex-lg-row flex-column shadow-sm">
+                    <div class=" d-flex align-items-center">
+                        <label for="Provinsi" class="form-label">Provinsi</label>
+                        <select class="form-select form-select m-3" aria-label=".form-select-lg example" id="province"
+                            name="prov">
+                            <option value="" selected>Pilih Provinsi ...</option>
+                            @foreach ($province as $p)
+                                <option value="{{ $p->id }}">
+                                    {{ $p->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                <div class=" d-flex align-items-center">
-                    <label for="Kabupaten" class="form-label">Kabupaten</label>
-                    <select class="form-select form-select m-3" aria-label=".form-select-lg example" id="city">
-                        <option selected>Pilih Kabupaten ...</option>
-                    </select>
-                </div>
+                    <div class=" d-flex align-items-center">
+                        <label for="Kabupaten" class="form-label">Kabupaten</label>
+                        <select class="form-select form-select m-3" aria-label=".form-select-lg example" id="city"
+                            name="city">
+                            <option value="" selected>Pilih Kabupaten ...</option>
+                        </select>
+                    </div>
 
-                <div class=" d-flex align-items-center">
-                    <label for="Kecamatan" class="form-label">Kecamatan</label>
-                    <select class="form-select form-select m-3" aria-label=".form-select-lg example" id="district">
-                        <option selected>Pilih Kecamatan ...</option>
-                    </select>
+                    <div class=" d-flex align-items-center">
+                        <label for="Kecamatan" class="form-label">Kecamatan</label>
+                        <select class="form-select form-select m-3" aria-label=".form-select-lg example" id="district"
+                            name="district">
+                            <option value="" selected>Pilih Kecamatan ...</option>
+                        </select>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-dark m-3 w-100">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="d-flex align-items-center">
-                    <button class="btn btn-dark m-3 w-100">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
-            </div>
-
-
+            </form>
         </div>
     </section>
 

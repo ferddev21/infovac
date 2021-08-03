@@ -226,8 +226,8 @@
                 }
             });
 
-
             $('#province').on('change', function() {
+
                 $.ajax({
                     url: '{{ route('address.city') }}',
                     method: 'POST',
@@ -236,26 +236,15 @@
                     },
                     success: function(response) {
                         $('#city').empty();
+                        $('#city').append(new Option('Pilih Kabupaten ...', ''));
                         $.each(response, function(id, name) {
                             $('#city').append(new Option(name, id))
-                        })
+                        });
                     }
                 });
 
-                $.ajax({
-                    url: '{{ route('address.district') }}',
-                    method: 'POST',
-                    data: {
-                        id: $(this).val()
-                    },
-                    success: function(response) {
-                        $('#district').empty();
-                        $.each(response, function(id, name) {
-                            $('#district').append(new Option(name, id))
-                        })
-                    }
-                });
-
+                $('#district').empty();
+                $('#district').append(new Option('Pilih Kecamatan ...', ''));
             });
 
             $("#city").on('change', function() {
@@ -267,14 +256,13 @@
                     },
                     success: function(response) {
                         $('#district').empty();
+                        $('#district').append(new Option('Pilih Kecamatan ...', ''));
                         $.each(response, function(id, name) {
                             $('#district').append(new Option(name, id))
-                        })
+                        });
                     }
-                })
+                });
             });
-
-
         });
     </script>
     <script src="//cdn.ckeditor.com/4.16.1/basic/ckeditor.js"></script>

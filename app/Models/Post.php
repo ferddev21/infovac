@@ -67,4 +67,11 @@ class Post extends Model
     {
         return $this->belongsTo(District::class, 'districts_id');
     }
+
+    public function getSearch($field_id, $ids)
+    {
+        return $this->with(['vaksin', 'user'])->where(
+            ['posts.status' => 'active', $field_id => $ids]
+        );
+    }
 }

@@ -29,6 +29,7 @@ use App\Http\Controllers\MemberPostController;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/post/{id}', [PageController::class, 'postView'])->name('post.view');
+Route::get('/search', [PageController::class, 'search'])->name('search');
 
 //route for address
 Route::post('/address/city', [AddressController::class, 'city'])->name('address.city');
