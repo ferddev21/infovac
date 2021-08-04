@@ -59,7 +59,6 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -91,9 +90,25 @@ class PostsController extends Controller
      * @param  \App\Models\Posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $posts)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'status' => 'required',
+        ]);
+
+        // mengecek isi form
+        // dd($request->all());
+
+        //mengambil data lama unuk dimasukkan apabila di form tidak ada
+        $post = Post::whereId($id)->first();
+        $old_nama = $post->nama_tempat;
+        //insert ke model database
+        $post->update([
+
+            'status' => $request->status,
+        ]);
+
+        return redirect('/admin/posts/')->with('status', 'Data Posts ' . $old_nama . ' berhasil diubah statusnya!');
     }
 
     /**
@@ -102,8 +117,9 @@ class PostsController extends Controller
      * @param  \App\Models\Posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $posts)
+    public function destroy($id)
     {
-        //
+        Post::whereId($id)->delete();
+        return redirect('/admin/posts/')->with('status', 'Data Posts berhasil dihapus!');
     }
 }

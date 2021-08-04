@@ -22,104 +22,65 @@
                   <hr>
 
                   <div class="row">
+                    <form method="POST" action="{{ route('posts.update',$posts['id'])}}">
+                      @csrf
 
                     <div class="col-12">
-                      <form method="POST" action="{{ route('vaksin.update',$posts['id'])}}">
+                      <img class="img-thumbnail m-3 mt-0 mb-0" src="{{ asset('file_images/posts/.1628008822_04161d10d5af763a70ed4e557bd8f6b6.jpg') }}"
+                      alt="">
+
+                   
                         @csrf
                         <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Nama Tempat</label>
-                          <input type="text"  name="nama_tempat" class="form-control  @error('nama_tempat') is-invalid @enderror" id="nama_tempat" value="{{$posts['nama_tempat']}}">
-                          @error('username')
-                          <div class="invalid-feedback">
-                            {{$message}}
-                          </div>
-                          @enderror
+                          <label for="exampleInputEmail1" class="form-label"><b>Nama Tempat : </b> {{$posts['nama_tempat']}}</label>
+
+                         
                         </div>
                         <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Nama User Pengirim</label>
-                          <input type="text" disabled name="user_id" class="form-control  @error('user_id') is-invalid @enderror" id="user_id" value="{{$posts->user->nama}}">
-                          @error('user_id')
-                          <div class="invalid-feedback">
-                            {{$message}}
-                          </div>
-                          @enderror
+                          <label for="exampleInputEmail1" class="form-label"><b>Nama User Pengirim : </b> {{$posts->user->nama}}</label>
+                        
+                         
                         </div>
                         <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Nama Vaksin</label>
-                          <div class="form-group">
-                            <select id="test1" name="vaksin" class="form-control" type="text">
-                              <option>Pilih Jenis Vaksin</option>
-                             @foreach ($vaksins as $vaksin)
-                              <option value="{{$vaksin->id}}" @if(old('vaksin',$posts->vaksin_id)==$vaksin->id) selected="selected" @endif>{{$vaksin->nama_vaksin}}</option>
-                              @endforeach
-                              </select>
-                          </div>
+                          <label for="exampleInputEmail1" class="form-label"><b>Nama Vaksin : </b> {{$posts->vaksin->nama_vaksin}}</label>
+                          
                     
-                          @error('vaksin_id')
-                          <div class="invalid-feedback">
-                            {{$message}}
-                          </div>
-                          @enderror
+                       
                         </div>
 
                         <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Nama Tempat</label>
-                          <input type="text" name="nama_tempat" class="form-control  @error('nama_tempat') is-invalid @enderror" id="nama_tempat" value="{{$posts['nama_tempat']}}">
-                          @error('nama_tempat')
-                          <div class="invalid-feedback">
-                            {{$message}}
-                          </div>
-                          @enderror
+                          <label for="exampleInputEmail1" class="form-label"><b>Nama Tempat : </b>{{$posts['nama_tempat']}}</label>
+                    
+                         
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label"><b>Alamat : </b> {{$posts['alamat']}}</label>
+
+                         
                         </div>
                         <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Alamat</label>
-                          <input type="text" name="alamat" class="form-control  @error('alamat') is-invalid @enderror" id="alamat" value="{{$posts['alamat']}}">
-                          @error('alamat')
-                          <div class="invalid-feedback">
-                            {{$message}}
-                          </div>
-                          @enderror
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Keterangan Tempat</label>
-                          <input type="text" name="keterangan_tempat" class="form-control  @error('keterangan_tempat') is-invalid @enderror" id="keterangan_tempat" value="{{$posts['keterangan_tempat']}}">
-                          @error('keterangan_tempat')
-                          <div class="invalid-feedback">
-                            {{$message}}
-                          </div>
-                          @enderror
+                          <label for="exampleInputEmail1" class="form-label"><b>Tempat : </b>  {{$posts['keterangan_tempat']}} </label>
+                         
+                         
                         </div>
                         <div class="mb-3">             
-                          <label for="exampleInputEmail1"  class="form-label">Tanggal Mulai</label>
-                          <input type="text" name="tgl_mulai"width="276" class="form-control  @error('tgl_mulai') is-invalid @enderror" value="{{$posts['tgl_mulai']}}">
-                          @error('tgl_mulai')
-                          <div class="invalid-feedback">
-                            {{$message}}
-                          </div>
-                          @enderror
+                          <label for="exampleInputEmail1"  class="form-label"><b>Mulai : </b>  {{$posts['tgl_mulai']}} </label>
+
+                         
                         </div>       
                         <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Tanggal Akhir</label>
-                          <input type="text" name="tgl_akhir" width="276"  class="form-control  @error('tgl_akhir') is-invalid @enderror" value="{{$posts['tgl_akhir']}}">
-                          @error('tgl_akhir')
-                          <div class="invalid-feedback">
-                            {{$message}}
-                          </div>
-                          @enderror
+                          <label for="exampleInputEmail1" class="form-label"><b>Akhir : </b>  {{$posts['tgl_akhir']}}</label>
+                      
+                       
                         </div>
                         <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Link Pendaftaran</label>
-                          <input type="text" name="link_pendaftaran" class="form-control  @error('link_pendaftaran') is-invalid @enderror" id="link_pendaftaran" value="{{$posts['link_pendaftaran']}}">
-                          @error('link_pendaftaran')
-                          <div class="invalid-feedback">
-                            {{$message}}
-                          </div>
-                          @enderror
+                          <label for="exampleInputEmail1" class="form-label"><b>Pendaftaran : </b>  {{$posts['link_pendaftaran']}}</label>
+                       
+                         
                         </div>
                       <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Status</label>
+                        <label for="exampleInputEmail1" class="form-label"><b>Status</b></label>
                       <select name="status" id="status">
-                        <option value="">Pilih status</option>
+                        <option value="{{$posts->status}}">{{$posts->status}}</option>
                         <option value="active">active</option>
                         <option value="inactive">inactive</option>
                       </select>

@@ -18,7 +18,11 @@
               <div class="card">
                 <div class="card-body">
                   <p class="card-title">Daftar List tempat Vaksin</p>
-
+                  @if (session('status'))
+                  <div class="alert alert-success">
+                      {{ session('status') }}
+                  </div>
+              @endif
                   <div class="row">
 
                     <div class="col-12">
@@ -38,13 +42,14 @@
 
 
                           <tr>
-                            <td>1</td>
+                            <td>{{$posts->firstItem() + $key}}</td>
                             <td>{{$p->nama_tempat}}</td>
                             <td>{{$p->user->nama}}</td>
                             <td>{{$p->vaksin->nama_vaksin}}</td>
                             <td>{{$p->status}}</td>
                             <td>
                               <a href="{{route('posts.detail',$p->id)}}" class="btn btn-primary "> Detail </a>
+                              <a href="{{route('posts.delete',$p->id)}}" class="btn btn-danger bi bi-trash"></a>  
                             </td>
                           </tr>
                           @endforeach
