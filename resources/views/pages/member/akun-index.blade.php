@@ -3,12 +3,15 @@
     <section class="pt-3">
         <div class="container px-lg-5">
             <div class="row py-4 border p-3 m-2 shadow-sm">
-                <h4 class=""><i class="bi bi-person-square"></i> Akun profile</h4>
+                <h4 class="fw-bold">
+                    <i class="bi bi-person-square"></i>
+                    Akun profile
+                </h4>
+                <p class="fw-light mt-2">
+                    Data akun anda, disarankan untuk melengkapi data berikut.
+                </p>
                 <form action="{{ route('member.account.update') }}" method="POST" class="mt-3">
                     @csrf
-
-
-
                     <input type="hidden" value="{{ $user->id }}" name="id">
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control  @error('nama') is-invalid @enderror" id="nama"
@@ -126,22 +129,28 @@
     <section class="pb-3 pt-2">
         <div class="container px-lg-5">
             <div class="row py-4 border p-3 shadow-sm m-2">
-                <h4 class=""><i class="bi bi-shield-lock-fill"></i> Ganti password</h4>
+                <h4 class="fw-bold"><i class="bi bi-shield-lock-fill"></i> Kata sandi</h4>
+                <p class="fw-light mt-2">
+                    Atur kata sandi akun anda.
+                </p>
                 <form action="{{ route('member.account.update_password') }}" method="POST" class="mt-3">
                     @csrf
-
                     <input type="hidden" value="{{ $user->id }}" name="id">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control  @error('password_lama') is-invalid @enderror"
-                            id="password_lama" placeholder="password_lama" name="password_lama"
-                            value="{{ old('password_lama') }}">
-                        <label for="password_lama">Password Sekarang</label>
-                        @error('password_lama')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
+                    @if (Hash::check($user->google_id, $user->password))
+                        <input type="hidden" value="{{ $user->google_id }}" name="password_lama">
+                    @else
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control  @error('password_lama') is-invalid @enderror"
+                                id="password_lama" placeholder="password_lama" name="password_lama"
+                                value="{{ old('password_lama') }}">
+                            <label for="password_lama">Password Sekarang</label>
+                            @error('password_lama')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    @endif
 
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control  @error('password_baru') is-invalid @enderror"
@@ -165,4 +174,30 @@
         </div>
     </section>
 
+    <section class="pb-3 pt-2">
+        <div class="container px-lg-5">
+            <div class="row py-4 border p-3 shadow-sm m-2">
+                <h4 class="fw-bold"><i class="bi bi-share-fill"></i> Otentikasi</h4>
+                <p class="fw-light mt-2">
+                    Masuk lebih cepat menggunakan akun google anda,
+                    email pada akun akan menyesuaikan dengan email Google anda.
+                </p>
+                <form action="{{ route('member.account.update_password') }}" method="POST" class="mt-3">
+                    @csrf
+                    <input type="hidden" value="{{ $user->id }}" name="id">
+                    <div class="d-flex flex-column">
+                        <div class="d-flex justify-content-between ">
+                            <p>Google</p>
+                            @if ($user->google_id != null)
+                                <a href="#" class="btn btn-danger" id="google-disc">Disconect</a>
+                            @else
+                                <a href="#" class="btn btn-secondary">Hubungkan</a>
+                            @endif
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
 @endsection

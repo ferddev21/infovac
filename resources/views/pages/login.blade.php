@@ -45,9 +45,10 @@
 
                                 <hr class="my-4">
                                 <div class="d-grid mb-2">
-                                    <button class="btn btn-google btn-login text-uppercase " type="submit">
+                                    <a href="{{ route('login.google') }}"
+                                        class="btn btn-google btn-login text-uppercase ">
                                         <i class="bi bi-google"> </i> Sign in with Google
-                                    </button>
+                                    </a>
                                 </div>
                             </form>
 

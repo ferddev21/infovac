@@ -87,7 +87,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <h2 class="fw-bold">
+                                    <h2 class="fw-bold text-truncate">
                                         {{ $post->nama_tempat }}
                                     </h2>
                                     <p class="fw-light text-capitalize">

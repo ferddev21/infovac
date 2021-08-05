@@ -98,10 +98,8 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="{{ asset('assets_member/js/scripts.js') }}"></script>
     @if (Request::url() == route('home'))
         <script>
-            // When the user scrolls down 20px from the top of the document, slide down the navbar
             window.onscroll = function() {
                 scrollFunction()
             };
@@ -117,107 +115,13 @@
     @endif
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
     <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <script type="text/javascript">
-        function deleteConfirmation(id) {
-            swal({
-                title: "Hapus Post",
-                text: "Yakin ingin menghapus post, data akan terhapus permanent?",
-                type: "warning",
-                showCancelButton: !0,
-                confirmButtonText: "Hapus!",
-                cancelButtonText: "Batal",
-                reverseButtons: !0
-            }).then(function(e) {
-
-                if (e.value === true) {
-                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-                    $.ajax({
-                            type: 'POST',
-                            url: "{{ route('member.post.delete') }}",
-                            data: {
-                                _token: CSRF_TOKEN,
-                                id: id
-                            },
-                            dataType: 'JSON',
-                        }).done(function(response) {
-                            swal('Berhasil dihapus, silahkan refresh halaman', response.message, response
-                                .status);
-                            readProducts();
-                        })
-                        .fail(function() {
-                            swal('Oops...', 'Something went wrong with ajax !', 'error');
-                        });
-                } else {
-                    e.dismiss;
-                }
-
-            }, function(dismiss) {
-                return false;
-            })
-        }
-
-        $(function() {
-            var dateFormat = "dd MM yy",
-                from = $("#from")
-                .datepicker({
-                    defaultDate: "+1w",
-                    dateFormat: "dd MM yy",
-                    changeMonth: true,
-                    numberOfMonths: 1
-                })
-                .on("change", function() {
-                    to.datepicker("option", "minDate", getDate(this));
-                }),
-                to = $("#to").datepicker({
-                    defaultDate: "+1w",
-                    dateFormat: "dd MM yy",
-                    changeMonth: true,
-                    numberOfMonths: 1
-                })
-                .on("change", function() {
-                    from.datepicker("option", "maxDate", getDate(this));
-                });
-
-            function getDate(element) {
-                var date;
-                try {
-                    date = $.datepicker.parseDate(dateFormat, element.value);
-                } catch (error) {
-                    date = null;
-                }
-
-                return date;
-            }
-        });
-    </script>
-
-    <script>
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": false,
-            "positionClass": "toast-bottom-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        }
-    </script>
-    {!! Toastr::message() !!}
     <script defer>
         $(function() {
             $.ajaxSetup({
@@ -264,13 +168,54 @@
                 });
             });
         });
+
+
+        //SWEET ALART
+        function deleteConfirmation(id) {
+            swal({
+                title: "Hapus Post",
+                text: "Yakin ingin menghapus post, data akan terhapus permanent?",
+                type: "warning",
+                showCancelButton: !0,
+                confirmButtonText: "Hapus!",
+                cancelButtonText: "Batal",
+                reverseButtons: !0
+            }).then(function(e) {
+
+                if (e.value === true) {
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+                    $.ajax({
+                            type: 'POST',
+                            url: "{{ route('member.post.delete') }}",
+                            data: {
+                                _token: CSRF_TOKEN,
+                                id: id
+                            },
+                            dataType: 'JSON',
+                        }).done(function(response) {
+                            swal('Berhasil dihapus, silahkan refresh halaman', response.message, response
+                                .status);
+                            readProducts();
+                            window.location.reload(true);
+                        })
+                        .fail(function() {
+                            swal('Oops...', 'Something went wrong with ajax !', 'error');
+                        });
+                } else {
+                    e.dismiss;
+                }
+
+            }, function(dismiss) {
+                return false;
+            })
+        }
     </script>
+
+    <script src="{{ asset('assets_member/js/scripts.js') }}"></script>
+
     <script src="//cdn.ckeditor.com/4.16.1/basic/ckeditor.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.ckeditor').ckeditor();
-        });
-    </script>
+    {!! Toastr::message() !!}
 </body>
 
 </html>

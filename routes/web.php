@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VaksinsController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MemberPostController;
+use App\Http\Controllers\SocialMediaAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,16 +76,28 @@ Route::post('/login/procces', [AuthController::class, 'login'])->name('login.pro
 Route::get('/auth/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register/procces', [AuthController::class, 'registerProcess'])->name('register.process');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+//social media auth route
+Route::get('/auth/google', [SocialMediaAuthController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('/auth/google/callback', [SocialMediaAuthController::class, 'handleGooleCallback'])->name('login.google.callback');
 
+Route::group(
+    ['middleware' => ['auth']],
+    function () {
 
-//member route
-Route::get('/member/account', [MemberController::class, 'index'])->name('member.account');
-Route::post('/member/account/update', [MemberController::class, 'update'])->name('member.account.update');
-Route::post('/member/account/update-password', [MemberController::class, 'updatePassword'])->name('member.account.update_password');
+        //member route
+        Route::get('/member/account', [MemberController::class, 'index'])->name('member.account');
+        Route::post('/member/account/update', [MemberController::class, 'update'])->name('member.account.update');
+        Route::post('/member/account/update-password', [MemberController::class, 'updatePassword'])->name('member.account.update_password');
 
-Route::get('/member/posts', [MemberPostController::class, 'index'])->name('member.post.index');
-Route::get('/member/posts/add', [MemberPostController::class, 'add'])->name('member.post.add');
-Route::post('/member/posts/create', [MemberPostController::class, 'create'])->name('member.post.create');
-Route::get('/member/posts/{id}/edit', [MemberPostController::class, 'edit'])->name('member.post.edit');
-Route::post('/member/posts/update', [MemberPostController::class, 'update'])->name('member.post.update');
-Route::post('/member/posts/delete', [MemberPostController::class, 'delete'])->name('member.post.delete');
+        Route::get('/member/posts', [MemberPostController::class, 'index'])->name('member.post.index');
+        Route::get('/member/posts/add', [MemberPostController::class, 'add'])->name('member.post.add');
+        Route::post('/member/posts/create', [MemberPostController::class, 'create'])->name('member.post.create');
+        Route::get('/member/posts/{id}/edit', [MemberPostController::class, 'edit'])->name('member.post.edit');
+        Route::post('/member/posts/update', [MemberPostController::class, 'update'])->name('member.post.update');
+        Route::post('/member/posts/delete', [MemberPostController::class, 'delete'])->name('member.post.delete');
+
+        Route::get('/member', function () {
+            return redirect()->route('member.post.index');
+        });
+    }
+);

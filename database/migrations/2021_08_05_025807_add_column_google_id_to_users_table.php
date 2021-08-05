@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVaksinsTable extends Migration
+class AddColumnGoogleIdToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateVaksinsTable extends Migration
      */
     public function up()
     {
-        Schema::create('vaksins', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_vaksin');
-            $table->text('keterangan');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('google_id')->after('email')->unique()->nullable();
         });
     }
 
@@ -28,6 +25,8 @@ class CreateVaksinsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vaksins');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('google_id');
+        });
     }
 }

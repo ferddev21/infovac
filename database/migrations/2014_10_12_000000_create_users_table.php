@@ -17,13 +17,13 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('username')->unique();
             $table->string('password');
-            $table->string('email', 32)->unique();
-            $table->string('nama', 32);
-            $table->string('alamat', 128)->nullable();
+            $table->string('email')->unique();
+            $table->string('nama');
+            $table->text('alamat')->nullable();
             $table->char('provinces_id', 2)->nullable();
             $table->char('cities_id', 4)->nullable();
             $table->char('districts_id', 7)->nullable();
-            $table->string('telp', 32);
+            $table->string('telp')->nullable();
             $table->enum('level', ['admin', 'member']);
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->rememberToken();

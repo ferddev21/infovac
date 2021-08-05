@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Carbon\Carbon;
 use Hashids\Hashids;
 
@@ -26,4 +27,17 @@ function hashids($data, $method)
 function fullAddress($alamat, $dist, $city, $prov)
 {
     return ucwords($alamat . ', ' . $dist . ', ' . $city . ', ' . $prov);
+}
+
+function smartUsername($name)
+{
+
+    $checkUsername = User::where('username', $name)->latest('id')->first();
+
+    $name = strtolower($name);
+    if ($checkUsername) {
+        $num =  $checkUsername->id + 1;
+        return $name . $num;
+    }
+    return $name;
 }

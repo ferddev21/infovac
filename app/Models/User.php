@@ -28,6 +28,7 @@ class User extends Authenticatable
         'telp',
         'level',
         'status',
+        'google_id',
     ];
 
     /**

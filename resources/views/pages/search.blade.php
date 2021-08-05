@@ -65,7 +65,7 @@
                                     <a href="{{ route('post.view', hashids($post->id, 'encode')) }}"
                                         class="text-decoration-none text-dark">
                                         <div class="d-flex justify-content-between mb-0">
-                                            <p><i class="bi bi-award"></i> {{ $post->vaksin->nama_vaksin }}</p>
+                                            <p><i class="bi bi-award "></i> {{ $post->vaksin->nama_vaksin }}</p>
 
                                             <div>
                                                 <span class="badge bg-dark p-2">
@@ -75,7 +75,7 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h2 class="fw-bold">
+                                        <h2 class="fw-bold text-truncate">
                                             {{ $post->nama_tempat }}
                                         </h2>
                                         <p class="fw-light text-capitalize">

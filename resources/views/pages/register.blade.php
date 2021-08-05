@@ -74,9 +74,9 @@
                         </form>
                         <hr class="my-4">
                         <div class="d-grid mb-2">
-                            <button class="btn btn-google " type="submit">
+                            <a href="{{ route('login.google') }}" class="btn btn-google " type="submit">
                                 <i class="bi bi-google"></i> Sign up with Google
-                            </button>
+                            </a>
                         </div>
 
 

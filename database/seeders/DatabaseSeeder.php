@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@mail.com',
             'nama' => 'Admin',
             'alamat' => 'Sleman CondongCatur',
-            'telp' => '0895396784047',
+            'telp' => '08123456789',
             'level' => 'admin',
             'status' => 'active',
         ]);
@@ -37,8 +37,11 @@ class DatabaseSeeder extends Seeder
             'keterangan_tempat' => 'Bertempat di Gedung JEC',
             'tgl_mulai' => new DateTime,
             'tgl_akhir' => new DateTime,
+            'provinces_id' => 34,
+            'cities_id' => 3403,
+            'districts_id' => 3403020,
             'link_pendaftaran' => 'bit.ly/daftar/',
-            'image_post' => 'Jec.jpeg',
+            'image_post' => '.1628008802_ea9530f6b1aa34e02b09da45ff4997c2.jpg',
             'status' => 'active',
         ]);
     }
