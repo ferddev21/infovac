@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Laravolt\Indonesia\Models\City;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Laravolt\Indonesia\Models\District;
+use Laravolt\Indonesia\Models\Province;
 
 class UserController extends Controller
 {
@@ -14,12 +17,24 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+
+        $this->provinceModel = new Province();
+        $this->cityModel = new City();
+        $this->districtsModel = new District();
+    }
+
+
     public function index()
     {
         $u = User::paginate(8);
         $data = [
             'title' => 'Data Posts',
-            'users' => $u
+            'users' => $u,
+            'provinces' => $this->provinceModel->all(),
+            'cities' => $this->cityModel->all(),
+            'districts' => $this->districtsModel->all()
         ];
 
         return view('pages.admin.member', $data);
@@ -33,7 +48,10 @@ class UserController extends Controller
     public function create()
     {
         $data = [
-            'title' => 'Tambah User'
+            'title' => 'Tambah User',
+            'provinces' => $this->provinceModel->all(),
+            'cities' => $this->cityModel->all(),
+            'districts' => $this->districtsModel->all()
 
         ];
 
@@ -70,6 +88,9 @@ class UserController extends Controller
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'telp' => $request->telp,
+            'provinces_id' => $request->province,
+            'cities_id' => $request->city,
+            // 'districts_id' => $request->district,
             'level' => $level,
             'status' => $request->status,
         ]);
@@ -100,7 +121,10 @@ class UserController extends Controller
 
         $data = [
             'title' => 'Data Vaksin',
-            'user' => $u
+            'user' => $u,
+            'provinces' => $this->provinceModel->all(),
+            'cities' => $this->cityModel->where(['province_id' => $u->provinces_id])->get(),
+            'districts' => $this->districtsModel->where(['city_id' => $u->cities_id])->get()
         ];
 
         return view('pages.admin.member-edit', $data);
@@ -140,6 +164,9 @@ class UserController extends Controller
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'telp' => $request->telp,
+            'provinces_id' => $request->province,
+            'cities_id' => $request->city,
+            'districts_id' => $request->district,
             'status' => $request->status,
         ]);
 

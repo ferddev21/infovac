@@ -45,7 +45,7 @@
                           <tr>
                             <td>{{$vaksins->firstItem() + $key}}</td>
                             <td>{{$v->nama_vaksin}}</td>
-                            <td>{{$v->keterangan}}</td>
+                            <td>{!! $v->keterangan !!}</td>
                             <td>
         
                               <a href="{{route('vaksin.delete',$v->id)}}" class="btn btn-danger bi bi-trash"></a>  

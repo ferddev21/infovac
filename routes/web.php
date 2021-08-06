@@ -43,30 +43,6 @@ Route::post('/address/district', [AddressController::class, 'district'])->name('
 
 
 //Ke halaman admin 
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-//ke halaman admin setting
-Route::get('/admin/setting/{id}', [AdminController::class, 'edit'])->name('admin.setting');
-Route::post('/admin/setting/update/{id}', [AdminController::class, 'update'])->name('admin.update');
-//ke halaman admin data vaksin 
-Route::get('/admin/vaksin', [VaksinsController::class, 'index'])->name('vaksin.index');
-Route::get('/admin/vaksin/tambah', [VaksinsController::class, 'create'])->name('vaksin.tambah');
-Route::post('/admin/vaksin/store', [VaksinsController::class, 'store'])->name('vaksin.store');
-Route::get('/admin/vaksin/edit/{id}', [VaksinsController::class, 'edit'])->name('vaksin.edit');
-Route::post('/admin/vaksin/update/{id}', [VaksinsController::class, 'update'])->name('vaksin.update');
-Route::get('/admin/vaksin/delete/{id}', [VaksinsController::class, 'destroy'])->name('vaksin.delete');
-
-//ke halaman admin data posts 
-Route::get('/admin/posts', [PostsController::class, 'index'])->name('posts.index');
-Route::get('/admin/posts/{id}', [PostsController::class, 'detail'])->name('posts.detail');
-Route::post('/admin/posts/update/{id}', [PostsController::class, 'update'])->name('posts.update');
-Route::get('/admin/posts/delete/{id}', [PostsController::class, 'destroy'])->name('posts.delete');
-//ke halaman admin data user 
-Route::get('/admin/user', [UserController::class, 'index'])->name('member.index');
-Route::get('/admin/user/tambah', [UserController::class, 'create'])->name('member.tambah');
-Route::get('/admin/user/edit/{id}', [UserController::class, 'edit'])->name('member.edit');
-Route::get('/admin/user/delete/{id}', [UserController::class, 'destroy'])->name('member.delete');
-Route::post('/admin/user/store', [UserController::class, 'store'])->name('member.store');
-Route::post('/admin/user/update/{id}', [UserController::class, 'update'])->name('member.update');
 
 
 
@@ -83,6 +59,33 @@ Route::get('/auth/google/callback', [SocialMediaAuthController::class, 'handleGo
 Route::group(
     ['middleware' => ['auth']],
     function () {
+        //admin route
+        Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
+        Route::get('/admin/setting/{id}', [AdminController::class, 'edit'])->name('admin.setting');
+        Route::post('/admin/setting/update/{id}', [AdminController::class, 'update'])->name('admin.update');
+
+        Route::get('/admin/vaksin', [VaksinsController::class, 'index'])->name('vaksin.index');
+        Route::get('/admin/vaksin/tambah', [VaksinsController::class, 'create'])->name('vaksin.tambah');
+        Route::post('/admin/vaksin/store', [VaksinsController::class, 'store'])->name('vaksin.store');
+        Route::get('/admin/vaksin/edit/{id}', [VaksinsController::class, 'edit'])->name('vaksin.edit');
+        Route::post('/admin/vaksin/update/{id}', [VaksinsController::class, 'update'])->name('vaksin.update');
+        Route::get('/admin/vaksin/delete/{id}', [VaksinsController::class, 'destroy'])->name('vaksin.delete');
+        
+        
+        Route::get('/admin/posts', [PostsController::class, 'index'])->name('posts.index');
+        Route::get('/admin/posts/{id}', [PostsController::class, 'detail'])->name('posts.detail');
+        Route::post('/admin/posts/update/{id}', [PostsController::class, 'update'])->name('posts.update');
+        Route::get('/admin/posts/delete/{id}', [PostsController::class, 'destroy'])->name('posts.delete');
+ 
+        Route::get('/admin/user', [UserController::class, 'index'])->name('member.index');
+        Route::get('/admin/user/tambah', [UserController::class, 'create'])->name('member.tambah');
+        Route::get('/admin/user/edit/{id}', [UserController::class, 'edit'])->name('member.edit');
+        Route::get('/admin/user/delete/{id}', [UserController::class, 'destroy'])->name('member.delete');
+        Route::post('/admin/user/store', [UserController::class, 'store'])->name('member.store');
+        Route::post('/admin/user/update/{id}', [UserController::class, 'update'])->name('member.update');
+       
+        
 
         //member route
         Route::get('/member/account', [MemberController::class, 'index'])->name('member.account');

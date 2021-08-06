@@ -39,15 +39,15 @@
                           </div>
                           @enderror
                         </div>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Keterangan Vaksin</label>
-                          <input type="text" name="keterangan" class="form-control  @error('keterangan') is-invalid @enderror" id="keterangan" value="{{$vaksins['keterangan']}}">
+                        <div class="mb-3"">
+                          <textarea class="ckeditor form-control rounded-3 @error('keterangan') is-invalid @enderror"
+                              name="keterangan">{{ $vaksins['keterangan'] }}</textarea>
                           @error('keterangan')
-                          <div class="invalid-feedback">
-                            {{$message}}
-                          </div>
+                              <div class="invalid-feedback">
+                                  {{ $message }}
+                              </div>
                           @enderror
-                        </div>
+                      </div>
                    
                         <button type="submit" class="btn btn-primary">Submit</button>
                       </form>

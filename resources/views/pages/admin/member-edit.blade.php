@@ -58,6 +58,51 @@
                           @enderror
                         </div>
                         <div class="mb-3">
+                          <label for="province">Provinsi</label>
+                                <div class="form-floating">
+                                    <select class="form-control aria-label="Floating label select example" name="province"
+                                        id="province">
+                                        <option value=""> </option>
+                                        @foreach ($provinces as $prov)
+                                            <option value="{{ $prov->id }}"
+                                                {{ $user->provinces_id == $prov->id ? 'selected' : '' }}>
+                                                {{ $prov->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="province">Kabupaten</label>
+                                <div class="form-floating">
+                                  <select class="form-control" aria-label="Floating label select example" name="city"
+                                        id="city">
+                                        <option value=""> </option>
+                                        @foreach ($cities as $city)
+                                            <option value="{{ $city->id }}"
+                                                {{ $user->cities_id == $city->id ? 'selected' : '' }}>
+                                                {{ $city->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="province">Kecamatan</label>
+                                <div class="form-floating">
+                                  <select class="form-control" aria-label="Floating label select example" name="district"
+                                        id="district">
+                                        <option value=""> </option>
+                                        @foreach ($districts as $district)
+                                            <option value="{{ $district->id }}"
+                                                {{ $user->districts_id == $district->id ? 'selected' : '' }}>
+                                                {{ $district->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                        </div>
+              
+                        <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Alamat</label>
                           <input type="text" name="alamat" class="form-control  @error('alamat') is-invalid @enderror" id="alamat" value="{{$user['alamat']}}">
                           @error('keterangan')
@@ -82,6 +127,7 @@
                           <option selected value="{{$user->status}}">{{$user->status}}</option>
                           <option value="active">active</option>
                           <option value="inactive">inactive</option>
+                    
                         </select>
                       </div>
                    

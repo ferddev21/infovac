@@ -13,6 +13,8 @@
               </div>
             </div>
           </div>
+        
+          
           <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
@@ -24,70 +26,94 @@
                   <div class="row">
                     <form method="POST" action="{{ route('posts.update',$posts['id'])}}">
                       @csrf
-
                     <div class="col-12">
-                      <img class="img-thumbnail m-3 mt-0 mb-0" src="{{ asset('file_images/posts/.1628008822_04161d10d5af763a70ed4e557bd8f6b6.jpg') }}"
+                      <img class="img-thumbnail m-3 mt-0 mb-0" src="{{ asset('file_images/posts/' . $posts->image_post) }}"
                       alt="">
-
+                      <hr>
+                      <p class="card-title">Dikskripsi</p>
                    
-                        @csrf
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label"><b>Nama Tempat : </b> {{$posts['nama_tempat']}}</label>
-
-                         
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label"><b>Nama User Pengirim : </b> {{$posts->user->nama}}</label>
-                        
-                         
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label"><b>Nama Vaksin : </b> {{$posts->vaksin->nama_vaksin}}</label>
-                          
+                      <table class="table">
                     
+                          <tr>
                        
-                        </div>
-
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label"><b>Nama Tempat : </b>{{$posts['nama_tempat']}}</label>
-                    
-                         
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label"><b>Alamat : </b> {{$posts['alamat']}}</label>
-
-                         
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label"><b>Tempat : </b>  {{$posts['keterangan_tempat']}} </label>
-                         
-                         
-                        </div>
-                        <div class="mb-3">             
-                          <label for="exampleInputEmail1"  class="form-label"><b>Mulai : </b>  {{$posts['tgl_mulai']}} </label>
-
-                         
-                        </div>       
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label"><b>Akhir : </b>  {{$posts['tgl_akhir']}}</label>
+                            <th style="width:12%">Nama Tempat</th>
+                            <td style="width:1%"> : </td>
+                            <td>{{$posts['nama_tempat']}}</td>
+                          </tr>
+                          <tr>    
+                            <th style="width:12%">Nama User Pengirim</th>
+                            <td style="width:1%"> : </td>
+                            <td>{{$posts->user->nama}}</td>
+                          </tr>
+                          <tr>    
+                            <th style="width:12%">Nama Vaksin</th>
+                            <td style="width:1%"> : </td>
+                            <td>{{$posts->vaksin->nama_vaksin}}</td>
+                          </tr>
+                          <tr>    
+                            <th style="width:12%">Alamat</th>
+                            <td style="width:1%"> : </td>
+                            <td>{{$posts->alamat}}</td>
+                          </tr>
+                          <tr>    
+                            <th style="width:12%">Provinsi</th>
+                            <td style="width:1%"> : </td>
+                            <td>{{$posts->province->name}}</td>
+                          </tr>
+                          <tr>    
+                            <th style="width:12%">Kabupaten</th>
+                            <td style="width:1%"> : </td>
+                            <td>{{$posts->citie->name}}</td>
+                          </tr>
+                          <tr>    
+                            <th style="width:12%">Kecamatan</th>
+                            <td style="width:1%"> : </td>
+                            <td>{{$posts->district->name}}</td>
+                          </tr>
+                          <tr>    
+                            <th style="width:12%">Keterangan Tempat</th>
+                            <td style="width:1%"> : </td>
+                            <td>{!! $posts->keterangan_tempat !!}</td>
+                          </tr>
+                          <tr>    
+                            <th style="width:12%">Tanggal Mulai</th>
+                            <td style="width:1%"> : </td>
+                            <td>{{ carbon($posts->tgl_mulai)->toFormattedDateString() }}</td>
+                          </tr>
+                          <tr>    
+                            <th style="width:12%">Tanggal Akhir</th>
+                            <td style="width:1%"> : </td>
+                            <td>{{ carbon($posts->tgl_akhir)->toFormattedDateString() }}</td>
+                          </tr>
+                          <tr>    
+                            <th style="width:12%">Link Pendaftaran Akhir</th>
+                            <td style="width:1%"> : </td>
+                            <td>{{$posts->link_pendaftaran}}</td>
+                          </tr>
+                          <tr>    
+                            <th style="width:12%">Status</th>
+                            <td style="width:1%"> : </td>
+                            <td>  <select name="status" id="status">
+                              <option value="{{$posts->status}}">{{$posts->status}}</option>
+                              <option value="active">active</option>
+                              <option value="inactive">inactive</option>
+                            </select></td>
+                          </tr>
+                          <tr>    
                       
-                       
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label"><b>Pendaftaran : </b>  {{$posts['link_pendaftaran']}}</label>
-                       
-                         
-                        </div>
-                      <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label"><b>Status</b></label>
-                      <select name="status" id="status">
-                        <option value="{{$posts->status}}">{{$posts->status}}</option>
-                        <option value="active">active</option>
-                        <option value="inactive">inactive</option>
-                      </select>
-                      </div>
+                            <td> <button type="submit" class="btn btn-primary">Submit</button>
+                            </form> </td>
+                          
+                          </tr>
+
+
+                
+                     
+                      </table>
+                     
                    
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                      </form>
+                   
+                        
                     </div>
                   </div>
                  
