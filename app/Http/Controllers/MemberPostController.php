@@ -24,11 +24,15 @@ class MemberPostController extends Controller
 
         $this->url_image = 'file_images/posts/';
     }
-    public function index()
+    public function index(Request $request)
     {
+        $uid = Auth::user()->id;
+
         $data = [
             'title' => 'Postingan Ku',
-            'posts' => $this->postModel->where('user_id', Auth::user()->id)->get()
+            'posts' => $this->postModel->getFilterPost($uid, $request->filter, $request->sort)->get(),
+            'sort' => $request->sort ?? '',
+            'filter' => $request->filter ?? ''
         ];
 
         return view('pages.member.post-index', $data);

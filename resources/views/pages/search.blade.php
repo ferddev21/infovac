@@ -75,13 +75,18 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <h2 class="fw-bold text-truncate">
+                                        <h2 class="fw-bold text-truncate" data-bs-toggle="tooltip"
+                                            data-bs-placement="bottom" title="{{ $post->nama_tempat }}">
                                             {{ $post->nama_tempat }}
                                         </h2>
-                                        <p class="fw-light text-capitalize">
-                                            <i class="bi bi-geo-alt-fill"></i>
-                                            {{ fullAddress($post->alamat, $post->district->name, $post->citie->name, $post->province->name) }}
-                                        </p>
+                                        <div class="text-truncate-container2 mb-3" data-bs-toggle="tooltip"
+                                            data-bs-placement="bottom"
+                                            title=" {{ fullAddress($post->alamat, $post->district->name, $post->citie->name, $post->province->name) }}">
+                                            <div class="fw-light text-capitalize">
+                                                <i class="bi bi-geo-alt-fill"></i>
+                                                {{ fullAddress($post->alamat, $post->district->name, $post->citie->name, $post->province->name) }}
+                                            </div>
+                                        </div>
                                         <div class="text-truncate-container ">
                                             <div class="card-text w-100 h-100">
                                                 <?= $post->keterangan_tempat ?>

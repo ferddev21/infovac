@@ -56,10 +56,10 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/auth/google', [SocialMediaAuthController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('/auth/google/callback', [SocialMediaAuthController::class, 'handleGooleCallback'])->name('login.google.callback');
 
-Route::group(
-    ['middleware' => ['auth']],
-    function () {
-        //admin route
+Route::middleware(['auth'])->group(function () {
+
+    //admin route
+    Route::middleware(['isAdmin'])->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
         Route::get('/admin/setting/{id}', [AdminController::class, 'edit'])->name('admin.setting');
@@ -71,36 +71,34 @@ Route::group(
         Route::get('/admin/vaksin/edit/{id}', [VaksinsController::class, 'edit'])->name('vaksin.edit');
         Route::post('/admin/vaksin/update/{id}', [VaksinsController::class, 'update'])->name('vaksin.update');
         Route::get('/admin/vaksin/delete/{id}', [VaksinsController::class, 'destroy'])->name('vaksin.delete');
-        
-        
+
+
         Route::get('/admin/posts', [PostsController::class, 'index'])->name('posts.index');
         Route::get('/admin/posts/{id}', [PostsController::class, 'detail'])->name('posts.detail');
         Route::post('/admin/posts/update/{id}', [PostsController::class, 'update'])->name('posts.update');
         Route::get('/admin/posts/delete/{id}', [PostsController::class, 'destroy'])->name('posts.delete');
- 
+
         Route::get('/admin/user', [UserController::class, 'index'])->name('member.index');
         Route::get('/admin/user/tambah', [UserController::class, 'create'])->name('member.tambah');
         Route::get('/admin/user/edit/{id}', [UserController::class, 'edit'])->name('member.edit');
         Route::get('/admin/user/delete/{id}', [UserController::class, 'destroy'])->name('member.delete');
         Route::post('/admin/user/store', [UserController::class, 'store'])->name('member.store');
         Route::post('/admin/user/update/{id}', [UserController::class, 'update'])->name('member.update');
-       
-        
+    });
 
-        //member route
-        Route::get('/member/account', [MemberController::class, 'index'])->name('member.account');
-        Route::post('/member/account/update', [MemberController::class, 'update'])->name('member.account.update');
-        Route::post('/member/account/update-password', [MemberController::class, 'updatePassword'])->name('member.account.update_password');
+    //member route
+    Route::get('/member/account', [MemberController::class, 'index'])->name('member.account');
+    Route::post('/member/account/update', [MemberController::class, 'update'])->name('member.account.update');
+    Route::post('/member/account/update-password', [MemberController::class, 'updatePassword'])->name('member.account.update_password');
 
-        Route::get('/member/posts', [MemberPostController::class, 'index'])->name('member.post.index');
-        Route::get('/member/posts/add', [MemberPostController::class, 'add'])->name('member.post.add');
-        Route::post('/member/posts/create', [MemberPostController::class, 'create'])->name('member.post.create');
-        Route::get('/member/posts/{id}/edit', [MemberPostController::class, 'edit'])->name('member.post.edit');
-        Route::post('/member/posts/update', [MemberPostController::class, 'update'])->name('member.post.update');
-        Route::post('/member/posts/delete', [MemberPostController::class, 'delete'])->name('member.post.delete');
+    Route::get('/member/posts', [MemberPostController::class, 'index'])->name('member.post.index');
+    Route::get('/member/posts/add', [MemberPostController::class, 'add'])->name('member.post.add');
+    Route::post('/member/posts/create', [MemberPostController::class, 'create'])->name('member.post.create');
+    Route::get('/member/posts/{id}/edit', [MemberPostController::class, 'edit'])->name('member.post.edit');
+    Route::post('/member/posts/update', [MemberPostController::class, 'update'])->name('member.post.update');
+    Route::post('/member/posts/delete', [MemberPostController::class, 'delete'])->name('member.post.delete');
 
-        Route::get('/member', function () {
-            return redirect()->route('member.post.index');
-        });
-    }
-);
+    Route::get('/member', function () {
+        return redirect()->route('member.post.index');
+    });
+});

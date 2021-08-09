@@ -43,10 +43,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link {{ Request::url() == route('home') ? 'active' : '' }} "
-                            aria-current="page" href="{{ route('home') }}">Home
-                        </a>
-                    </li>
+
                     @if (Auth::user())
 
                         <li class="nav-item dropdown">
@@ -57,8 +54,11 @@
                                 {{ Auth::user()->username }} </a>
                             <div class="dropdown-menu dropdown-menu-end  animate slideIn"
                                 aria-labelledby="navbarDropdown">
+                                @if (Auth::user()->level == 'admin')
+                                    <a class="dropdown-item" href="{{ route('admin.index') }}">Dashboard Admin</a>
+                                @endif
                                 <a class="dropdown-item {{ Request::url() == route('member.post.index') ? 'active' : '' }}"
-                                    href="{{ route('member.post.index') }}">Postinganku</a>
+                                    href="{{ route('member.post.index') }}">Postingan ku</a>
                                 <a class="dropdown-item {{ Request::url() == route('member.account') ? 'active' : '' }}"
                                     href="{{ route('member.account') }}">Akun</a>
                                 <div class="dropdown-divider"></div>
@@ -66,6 +66,11 @@
                             </div>
                         </li>
                     @else
+                        <li class="nav-item"><a
+                                class="nav-link {{ Request::url() == route('home') ? 'active' : '' }} "
+                                aria-current="page" href="{{ route('home') }}">Home
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link {{ Request::url() == route('register') ? 'active' : '' }}"
                                 href="{{ route('register') }}">Berkontribusi</a>

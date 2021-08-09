@@ -18,7 +18,7 @@ class PageController extends Controller
             'title' => 'Info Vaksinasi',
             'imageCover' => 'https://images.pexels.com/photos/5863389/pexels-photo-5863389.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
             'province' => Province::all(),
-            'posts' => Post::with(['vaksin', 'user'])->where('status', 'active')->get()
+            'posts' => Post::with(['vaksin', 'user'])->where('status', 'active')->orderBy('id', 'desc')->get()
         ];
 
         return view('pages.home', $data);
@@ -49,22 +49,22 @@ class PageController extends Controller
         $view = 'pages.search';
 
         if ($request->district != null) {
-            $data['posts'] = $this->post->getSearch('districts_id', $request->district)->get();
+            $data['posts'] = $this->post->getSearch('districts_id', $request->district)->orderBy('id', 'desc')->get();
             return view($view, $data);
         }
 
         if ($request->city != null) {
-            $data['posts'] = $this->post->getSearch('cities_id', $request->city)->get();
+            $data['posts'] = $this->post->getSearch('cities_id', $request->city)->orderBy('id', 'desc')->get();
             return view($view, $data);
         }
 
         if ($request->prov != null) {
-            $data['posts'] = $this->post->getSearch('provinces_id', $request->prov)->get();
+            $data['posts'] = $this->post->getSearch('provinces_id', $request->prov)->orderBy('id', 'desc')->get();
             return view($view, $data);
         }
 
         if ($request->prov == null) {
-            $data['posts'] = Post::with(['vaksin', 'user'])->where('status', 'active')->get();
+            $data['posts'] = Post::with(['vaksin', 'user'])->where('status', 'active')->orderBy('id', 'desc')->get();
             return view($view, $data);
         }
     }

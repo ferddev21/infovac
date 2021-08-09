@@ -74,4 +74,21 @@ class Post extends Model
             ['posts.status' => 'active', $field_id => $ids]
         );
     }
+
+    public function getFilterPost($uid, $filter, $sort)
+    {
+        if (!empty($sort)) {
+            if (!empty($filter)) {
+                return $this->where(['user_id' => $uid, 'status' => $filter])->orderBy('id', $sort);
+            } else {
+                return $this->where(['user_id' => $uid])->orderBy('id', $sort);
+            }
+        } else {
+            if (!empty($filter)) {
+                return $this->where(['user_id' => $uid, 'status' => $filter]);
+            } else {
+                return $this->where(['user_id' => $uid])->orderBy('id', 'desc');
+            }
+        }
+    }
 }

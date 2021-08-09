@@ -120,6 +120,13 @@ h1,
     overflow: hidden !important;
 }
 
+.text-truncate-container2 div {
+    -webkit-line-clamp: 2 !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+
 @keyframes cssAnimation {
     to {
         width: 0;
