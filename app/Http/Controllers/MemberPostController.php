@@ -67,7 +67,7 @@ class MemberPostController extends Controller
         ]);
 
         //set nama file image baru
-        $fileName = '.' . time() . '_' . md5($request->nama_tempat) .  '.' . $request->image->extension();
+        $fileName = time() . '_' . md5($request->nama_tempat) .  '.' . $request->image->extension();
 
         // simpan file image public/file_images/posts/
         if ($request->image->move(public_path($this->url_image), $fileName)) {
@@ -144,7 +144,7 @@ class MemberPostController extends Controller
         if ($request->image) {
 
             //set nama file image baru
-            $fileName = '.' . time() . '_' . md5($request->nama_tempat) .  '.' . $request->image->extension();
+            $fileName = time() . '_' . md5($request->nama_tempat) .  '.' . $request->image->extension();
 
             if ($request->image->move(public_path($this->url_image), $fileName)) {
                 //check apakah file image sebelumnya tidak kosong
