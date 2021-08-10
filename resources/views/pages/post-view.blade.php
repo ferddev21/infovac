@@ -23,7 +23,7 @@
                             <span class="badge bg-dark p-2">
                                 {{ carbon($post->tgl_mulai)->toFormattedDateString() }}
                                 -
-                                {{ carbon($post->tgl_selesai)->toFormattedDateString() }}
+                                {{ carbon($post->tgl_akhir)->toFormattedDateString() }}
                             </span>
                         </div>
                     </div>
