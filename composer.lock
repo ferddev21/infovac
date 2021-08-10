@@ -79,7 +79,8 @@
             "require": {
                 "illuminate/session": ">=5.2.7",
                 "illuminate/support": ">=5.2.7",
-                "php": ">=5.5.0"
+                "php": ">=5.5.0",
+                "ext-gmp": "*"
             },
             "type": "library",
             "extra": {
