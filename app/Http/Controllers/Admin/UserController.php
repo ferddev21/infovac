@@ -30,7 +30,7 @@ class UserController extends Controller
     {
         $u = User::paginate(8);
         $data = [
-            'title' => 'Data Posts',
+            'title' => 'Data User',
             'users' => $u,
             'provinces' => $this->provinceModel->all(),
             'cities' => $this->cityModel->all(),
@@ -120,7 +120,7 @@ class UserController extends Controller
         $u = User::find($id);
 
         $data = [
-            'title' => 'Data Vaksin',
+            'title' => 'Data User',
             'user' => $u,
             'provinces' => $this->provinceModel->all(),
             'cities' => $this->cityModel->where(['province_id' => $u->provinces_id])->get(),

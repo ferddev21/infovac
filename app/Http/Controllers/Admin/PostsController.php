@@ -119,6 +119,11 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
+        $post = Post::whereId($id)->first();
+        $this->url_image = 'file_images/posts/';
+        if (!empty($post->image_post)) {
+            unlink(public_path($this->url_image) . $post->image_post);
+        }
         Post::whereId($id)->delete();
         return redirect('/admin/posts/')->with('status', 'Data Posts berhasil dihapus!');
     }
